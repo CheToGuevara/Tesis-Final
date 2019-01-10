@@ -1,0 +1,65 @@
+\chapter{Posicionamiento de pacientes virtuales} 
+\label{cap:posing}
+
+En este capítulo, se propone un método que permita adaptar la anatomía, interna y/o externa, de un modelo anatómico virtual a cualquier pose requerida. Tal y como se explica en la capítulo \ref{cap:intro} de introducción, esta tesis se ha desarrollado en el contexto del proyecto \ac{RASimAs}, financiado por el 7º programa marco de la Unión Europea. Crear un simulador de anestesia regional que permitiese entrenar a los futuros médicos fue uno de los principales objetivos del proyecto. 
+Este simulador debía ofrecer una amplia base de pacientes virtuales, de forma que el anestesista se pudiese enfrentar a una gran diversidad de variedades anatómicas durante su aprendizaje. Dependiendo del nervio que se desee bloquear, el procedimiento requiere una pose específica del paciente. Los algoritmos, que aquí se describen, se diseñaron para adaptar los modelos anatómicos de la base de datos de pacientes a las poses requeridas en las distintas versiones del procedimiento. Dada su importancia, \ac{RASimAs} dedicó una tarea completa a solucionar este problema (ver sección \ref{art:rasimas}). 
+De esta forma, los requisitos que guiaron su diseño vienen impuestos por las necesidades del proyecto (ver sección \ref{posing:req}). Todos los algoritmos propuestos se integraron en la herramienta \ac{TPTVPH}, desarrollada completamente en el contexto de esta tesis y que formaba parte de la \emph{suite}\footnote{Paquete de aplicaciones desarrolladas con distintos objetivos y capaces de cooperar entre sí.} de aplicaciones \ac{ITGVPH}, módulo de creación de pacientes virtuales de  \ac{RASimAs}.
+
+%\del{Como se puede leer en el capítulo de introducción \ref{cap:intro}, el objetivo de esta tesis viene influenciado por el proyecto europeo \ac{RASimAs} cuya finalidad de crear un simulador de anestesia que pueda entrenar con una base de datos de pacientes virtuales consiguiendo variabilidad anatómica adecuada para practicar el procedimiento.
+%El proyecto europeo dedica una tarea completa a solucionar la problemática de poder reposicionar modelos anatómicos con el objetivo de crear una base de datos con una gran variabilidad anatómica (ver sección \ref{art:rasimas}).}
+
+%\todo{No está mal escrito, pero es redundante con los objetivos de RASimAs}
+%\del{En el contexto de entrenamiento médico, es fundamental que los usuarios se enfrenten a la mayor cantidad de situaciones posibles. 
+%Es por ello, que se ha propuesto un método que permita la creación de un conjunto de datos extenso de forma automática o semi-automática y a la vez pueda ser utilizada en cualquier simulador de realidad virtual.}
+
+El conjunto de algoritmos que se han diseñado a lo largo de este trabajo de tesis, extienden la animación esqueletal clásica a la animación de los tejidos internos de un modelo virtual. Al tratarse de un método puramente geométrico ofrece, con un coste computacional bajo, resultados plausibles y estables. Otro de los motivos principales por los que se escogió un método geométrico frente a un método basado en modelos físicos, es la posibilidad de manipular modelos anatómicos incompletos o de los que no se disponen sus propiedades mecánicas. Estas características, hacen que su uso sea adecuado en otras aplicaciones, incluso más allá del ámbito médico.  En el mundo del ocio interactivo, especialmente en el sector de los videojuegos, un bajo coste computacional, la estabilidad, la plausibilidad de los resultados y la posibilidad de aplicarlo a estructuras anatómicas incompletas, son características más importantes que la precisión física de las transformaciones. 
+
+%\todo{hay que dar mas peso a lo de los modelos incompletos que a la interactividad. En el caso de rasimas es más importante. }
+%\del{ Con este propósito, se han diseñado y adaptado diferentes algoritmos de animación esqueletal con el objetivo de animar tejidos internos y externos de un paciente virtual. Se ha elegido utilizar métodos geométricos que permiten la creación de resultados plausibles y a la vez tienen la ventaja de que permiten una deformación interactiva. Esta ventaja frente a los métodos basados en físicos dan lugar a que el algoritmo presentado en este capítulo pueda incluirse en cualquier simulador que requiera de deformación en tiempo real. Otra ventaja que tiene el método propuesto es la posibilidad de manipular modelos anatómicos incompletos o que no se disponen de sus propiedades mecánicas.}
+
+\section{Requisitos de diseño}
+\label{posing:req}
+%\new{Decisiones de diseño}
+
+%\todo{De manera ideal no son los requisitos nos los fijan los socios. Sino los objetivos del proyecto. Lo cambiamos a decisiones? }
+%\del{Al formar parte de un proyecto donde intervienen más grupos de investigación, la tarea específica viene acompañada de una serie de requisitos que necesitan ser respetados, pero al mismo tiempo es la principal motivación que se encuentra al formular una solución innovadora:}
+En las etapas iniciales del proyecto \ac{RASimAs} se establecieron los objetivos del módulo de creación de pacientes virtuales \ac{ITGVPH}, del que la herramienta \ac{TPTVPH} formaba parte. A partir de dichos objetivos se definieron los requisitos y, por ende, de los algoritmos que lo componían.
+
+
+%\todo {0.No está escrito como unos requisitos. Mezclas requisitos con decisiones de diseño!!!
+%1. El enfoque geométrico no es una recomendación es una consecuencia de los objetivos
+%2. Realmente en el estado del arte, se ha demostrado que el enfoque geométrico es menos sensible a la calidad de datos de entrada?????. 
+%3. a que te refieres con tipos de datos. Realmente te refieres a modelos incompletos. }
+\begin{itemize}
+    \item El proceso de selección de poses deberá ser guiado y supervisado por un experto para garantizar la validez de los modelos generados. Dado el coste económico del tiempo de un experto, la herramienta deberá tener una interfaz sencilla y los algoritmos deberán ejecutarse en modelos complejos con tasas de refresco interactivas.
+    \item La intervención del usuario se limitará a la selección de la pose final. El resto de procesos involucrados en la preparación de los modelos deberán realizarse de forma automática.
+    \item Los datos de entrada se obtendrán promediando datos de diferentes pacientes reales y registrándolos sobre el modelo de \emph{ZygoteBody}$^{TM}$ \cite{kelc2012zygote}. Los datos de pacientes reales provendrán de distintas técnicas de imagen médicas (\ac{US}, \ac{IRM}, \ac{TC}). Dado que no existe ninguna técnica de imagen capaz de capturar todas las estructuras anatómicas internas, los pacientes virtuales generados no dispondrán de modelos de todos sus tejidos internos. Solo se garantiza que se dispondrán los modelos adecuados de la piel y los huesos. 
+    \item En el momento de realizar el posicionamiento del paciente virtual, no se conocerán las propiedades mecánicas de las distintas estructuras anatómicas que lo componen.
+    % \todo{Te lo he rescrito porque creo que me suena raro. Creo que no resaltas lo que es realmente importante. Aaron: Me gustaba lo de generar colisiones adicionales... }
+     %\del{Para mantener la calidad del modelo anatómico de las siguientes etapas y tareas dependientes de esta (p. ej. el módulo de \ac{US}), el resultado de este algoritmo no deberá generar colisiones adicionales indeseables entre los tejidos y tener igual o menos colisiones que las existentes al llegar como entrada.}
+    \item Los algoritmos propuestos deberán evitar que se produzcan autocolisiones o colisiones entre los distintos tejidos, dado que esto podría provocar fallos en  algunos módulos del simulador. El módulo de \ac{US} es especialmente sensible a estos artefactos.
+     %\item \del{Se recomienda un enfoque geométrico ya que, en fases previas al proyecto, se consideró la posibilidad de utilizar un método basado en físicas para la tarea en cuestión. Como se ha podido comprobar en el estado del arte \ref{art:animation}, un enfoque geométrico es menos dependiente de la calidad de los datos de entrada, obtenidos por etapas anteriores en este proyecto. Un modelo basado en físicas necesitaría una descripción completa de todos los tejidos; sin embargo, el método geométrico puede ser útil si estos datos no están disponibles.}
+    %\item  \del{\ac{TPTVPH} (ver sección \ref{art:rasimas}) podrá ser capaz de trabajar con cualquier tipo de datos que procedan de un paciente virtual. Como no se puede asegurar que todos los tejidos se encuentren disponibles, el algoritmo deberá ser lo máximo flexible posible para manejarlos.}
+    
+    %\item \todo{He usado este objetiv para meter la importancia de la interactividad.}\del{Aun así, el proceso de posicionamiento tendrá que ser supervisado. Profesionales cualificados definirán un conjunto genérico de posturas para el procedimiento de \ac{RA}. Un método semiautomático será desarrollado para facilitar la consecución de la validez y calidad de los modelos de pacientes virtuales.}
+    %\item \del{El usuario podrá modificar la postura del \ac{VPH} a través de una interfaz 3D interactiva \del{con la intención de reducir el procedimiento completo}. El algoritmo deberá ejecutar en tiempo real para mejorar la experiencia de uso. }
+    
+ \end{itemize}
+
+
+%\todo{No puede haber solo una subsección!!!}
+%\subsection{Requisitos del posicionador de pacientes virtuales}
+
+%\todo{Si te sobra tiempo, puede describir las ventajas de los métodos fiscos sobre los geométricos. Coste computacional, estabilidad, flexibilidad. Por otro lado, los cambios de poses requieren grandes movimientos que para ser capturados de forma precisa necesitan que se tengan en cuenta numerosos comportamientos que no fáciles de simular (deformaciones elásticas, interacciones:  deslizamientos, contactos). Requieren modelos completos y bien caracterizados... }
+
+En un primer momento, se planteó la posibilidad de trabajar con técnicas basadas en modelos físicos en aras de conseguir una deformación precisa de los tejidos. Esta opción fue desechada principalmente por no disponer de una descripción mecánica de los tejidos involucrados en la simulación. Estás técnicas generalmente requieren importantes recursos computacionales que impiden que puedan usarse en aplicaciones interactivas. El problema se agrava cuando se quieren simular grandes deformaciones que involucran diversos y complejos fenómenos físicos.
+
+Por otro lado, muchas veces la resolución de los sistemas de ecuaciones diferenciales que modelan el comportamiento del sistema requiere de métodos numéricos que no siempre son estables. En experimentos iniciales, se optó por trabajar con técnicas muy utilizadas como las propuestas en  \cite{Muller2004} e implementadas en \ac{SOFA}. Pronto quedó patente que los modelos de tejidos utilizados eran demasiado complejos como para que este tipo de técnicas funcionasen de forma adecuada.
+%\del{Como se puede leer en la sección \ref{art:animation}, estos métodos basaban sus resultados en un alto coste computacional, o en centrarse en una única anatomía.  Además, algunas técnicas requieren de modelos muy bien caracterizados o de capturas en diferentes posiciones, lo cual es el principal objetivo que quiere solventar la herramienta planteada. Técnicas clásicas como \cite{Muller2004}, se ejecutaron en el software de simulación \ac{SOFA}. Los modelos iniciales del sistema eran demasiado complejos para conseguir tasas de refresco adecuadas para una interacción con el usuario.}
+Durante el desarrollo de esta tesis, se han propuesto nuevas técnicas que podrían cumplir con algunos de los requisitos planteados (ver sección \ref{art:fisica}). En \cite{abu2015position}, se propone un método capaz de simular el comportamiento interno de la anatomía, permitiendo la caracterización mecánica de los tetraedros según el tejido anatómico al que pertenecen.  
+%\del{con el objetivo de generar movimientos de los tejidos óseos plausibles}
+%\todo{No entiendo que quiere decir: -- se puede asignar propiedades mecánicas diferenteas a cada tetraedro.}. 
+El principal inconveniente de esta técnica es la imposibilidad de conseguir tiempos interactivos con la complejidad de los modelos anatómicos que se estaban utilizando. Además, la publicación de este artículo ha sido posterior a la fecha de incorporación del algoritmo en el proyecto europeo.
+%\todo{Yo reescribiria la última frase es muy enrevesada}\del{, además de tener en cuenta que su aparición fue posterior a la fecha de finalización de la tarea.}
+
+Como consecuencia de lo expuesto, se decidió desechar la opción de trabajar con métodos basados en modelos físicos y se optó por diseñar una técnica geométrica. En las siguientes secciones se describirá el método propuesto.

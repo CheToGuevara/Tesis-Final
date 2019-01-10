@@ -1,0 +1,103 @@
+\usepackage{amsfonts}%for math symbols
+
+\usepackage{multirow}
+\usepackage{indentfirst}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} %acentos
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{lscape}
+\usepackage{rotating}
+
+\usepackage{acronym}
+\usepackage{pdfpages}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+ \renewcommand{\chaptermark}[1]{ \markboth{  \thechapter.\ #1}{}}
+ \renewcommand{\sectionmark}[1]{ \markright{ \thesection.\ #1}}
+ \fancyhead[LE]{ \textsf{\leftmark} }
+ \fancyhead[RO]{ \textsf{\rightmark} }
+% \fancyfoot[RE,LO]{ \scriptsize \textrm{\corto}}
+\fancyfoot[LE,RO]{\thepage}
+
+   \renewcommand{\headrulewidth}{0pt} % remove lines as well
+   \renewcommand{\footrulewidth}{0pt}
+
+\setlength{\oddsidemargin}{15truemm}
+\setlength{\evensidemargin}{-5truemm}
+\setlength{\textheight}{225truemm}
+\setlength{\textwidth}{144truemm}
+\setlength{\topmargin}{-10truemm}
+\setlength{\headheight}{6truemm}
+\setlength{\headsep}{12truemm}
+\setlength{\footskip}{13truemm} 
+\setlength{\parskip}{1truemm}
+
+\DeclareGraphicsExtensions{.pdf,.jpg,.eps,.ps, .png, .gif}
+
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{algpseudocode}
+\usepackage{fancyvrb}
+\usepackage[chapter]{algorithm}
+\usepackage{subcaption}
+\usepackage{amsthm} %Extensiones para entornos de teoremas
+\usepackage{amsmath}%
+
+% Macros para control de cambios
+%\usepackage[usenames]{color}
+%\usepackage[dvips]{color}
+%\usepackage{colordvi}
+\usepackage{ulem}
+\usepackage{hyperref}
+%\usepackage[table,xcdraw]{xcolor}
+
+\usepackage{lipsum}
+\usepackage{todonotes}
+
+\newcommand{\nota}[1]{
+\todo[linecolor=cyan,backgroundcolor=cyan!25,bordercolor=cyan]{#1}
+%{\textbf{Marcos}: #1}
+   }
+
+\newcommand{\del}[1]{\textcolor{red}{\sout{#1}}} %\sout}
+\newcommand{\new}[1]{\textcolor{blue}{\uline{#1}}} %\sout}
+\normalem
+\newcommand{\borrar}[1]{\textcolor{red}{\sout{#1}}} %\sout}
+\newcommand{\nuevo}[1]{\textcolor{blue}{\uline{#1}}} %\sout}
+% Cambio del formato de los comentarios de los algoritmos
+\renewcommand{\algorithmiccomment}[1]{// #1}
+\algrenewcommand\algorithmicprocedure{\textbf{método}}
+\algrenewcommand\algorithmicforall{\textbf{para todos}}
+\algrenewcommand\algorithmicfor{\textbf{para}}
+\algrenewcommand\algorithmicwhile{\textbf{mientras}}
+\algrenewcommand\algorithmicdo{\textbf{hacer}}
+\algrenewcommand\algorithmicend{\textbf{fin}}
+% Creaci?n del entorno Definici?n
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+
+\usepackage[compact,noindentafter]{titlesec}
+ 
+% \titleformat{\chapter}[hang]
+%   {\normalfont\bfseries}{}{0pt}{\huge \thechapter.}
+
+\raggedbottom
+
+% \newcommand{\nochapter}[2]{
+% 	\setcounter{chapter}{#1}
+% 	\setcounter{section}{0}
+% 	\chapter*{#1. #2}
+% 	\addcontentsline{toc}{chapter}{#1. #2}
+% }

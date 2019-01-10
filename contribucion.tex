@@ -1,0 +1,168 @@
+\section{Validación de hipótesis}
+\label{conclu:hipotesis}
+
+El algoritmo propuesto ha cumplido con los objetivos que se habían enunciado en la sección \ref{intro:objetivos}. Se ha diseñado un cauce basado en la animación esqueletal que permite transformar interactivamente los modelos anatómicos de pacientes virtuales, los cuales originalmente se encuentran en una postura diferente a la posición necesaria para el entrenamiento de un determinado procedimiento médico. A su vez, el método propuesto permite deformar la anatomía aunque los modelos estén incompletos o falten sus descripciones mecánicas. Este algoritmo ha sido incorporado en dos herramientas con distintos objetivos como casos de uso.
+
+En el primer caso de uso, aunque no se ha podido realizar una evaluación formal de la \emph{suite} \ac{ITGVPH}, donde se integró el algoritmo propuesto, si contaba con el visto bueno de los médicos implicados en el proyecto \ac{RASimAs}.
+%\todo{explica que contaba con el visto bueno del los medicos implicados en tel proyecoto}
+%en el segundo caso de uso si ha sido posible. 
+
+Por otra parte, en el segundo caso de uso, si ha sido posible su evaluación formal.
+%\todo{Reescribe la parte comentada en otra frase.}
+El algoritmo propuesto forma parte del simulador de radiología diagnóstica que exige que la adaptación del paciente virtual sea plausible a la vez que se obtiene una imagen radiográfica al instante.
+%Este segundo caso de uso representa una exigencia mayor al tener que compartir la deformación producida con otra librería manteniendo las tasas de refresco interactivas.
+La validación de apariencia y de contenido realizada para el simulador %de radiología diagnóstica 
+permite asegurar que el algoritmo proporciona deformaciones útiles para el entrenamiento de las proyecciones radiológicas.
+Esto induce a pensar que se pueden utilizar enfoques geométricos para el entrenamiento de procedimientos médicos.
+
+Considerando esto último, se puede afirmar positivamente que se ha validado la hipótesis de partida.
+
+
+
+
+\section{Contribuciones}
+\subsection{Contribuciones científicas}
+\label{conclu:cientifica}
+
+\textbf{Congreso nacional } \emph{``An Interactive Algorithm for Virtual Patient Positioning"} \cite{ceig.20151197} presentando en Congreso Español de Informática Gráfica en 2015. 
+
+La primera contribución fue presentar una versión inicial del algoritmo en un congreso nacional. El objetivo era la adaptación del cauce clásico de animación esqueletal a modelos volumétricos. En esta publicación, la técnica de \emph{skinning} utilizada es \ac{DQS} que, aunque es una alternativa popular a la técnica \ac{LBS}, generaba incrementos de volumen que no eran útiles para utilizarlos en entrenamiento médico. De esta manera se introdujo un proceso de optimización no interactivo a cambio de mejorar la calidad del resultado. Mientras se trabajaba en las distintas integraciones del algoritmo en los casos de uso presentados, se buscó alternativas a la técnica \ac{DQS}. Se puede consultar en el anexo \ref{anexo:ceig}.
+
+\textbf{Artículo científico }\emph{``Real-time animation of human characters' anatomy"} \cite{SUJAR2018268} presentando en la revista Computer \& Graphics en 2018. 
+
+%\todo{Paper EG y el paper pendiente de publicacion.}
+
+Como contribución principal de esta tesis, se presentó un artículo en una revista impactada en el que se presentaba el algoritmo propuesto. Como se ha descrito en los resultados del capítulo (sec. \ref{posing:result}), la solución propuesta al utilizar \ac{COR} podría reemplazar la fase de optimización con la consecución de que la herramienta permita deformaciones útiles para el entrenamiento médico interactivamente. Se puede leer en el anexo \ref{anexo:cag}.
+
+\textbf{ Congreso Internacional }\emph{``A Virtual Physiological Human Model for Regional Anaesthesia"} \cite{VHZKLBSGSD16} presentado en la conferencia Virtual Physiological Human (VPH) en 2016.
+
+Este artículo representa la propuesta de los objetivos de la \emph{suite} \ac{ITGVPH}, dentro del proyecto \ac{RASimAs}. La idea principal era crear un conjunto de herramientas que permita crear una base de datos que contenga multitud de variaciones anatómicas. En este conjunto se ha integrado el algoritmo propuesto a través de la herramienta \ac{TPTVPH} que permitía la adaptación del paciente virtual a la postura requerida por el simulador. Se publicó inicialmente esta publicación en el congreso \emph{ Virtual Physiological Human (VPH)} como introducción a las demás publicaciones relacionadas con el proyecto \ac{RASimAs}. Lamentablemente, debido a los problemas para realizar la validación del simulador junto con la finalización del proyecto, han  impedido seguir en esta línea. %Tampoco ha sido posible publicar  hasta que el simulador haya pasado su validación clínica.
+
+\textbf{ Congreso Internacional }\emph{``gVirtualXRay: Virtual X-Ray Imaging Library on GPU"} \cite{sujar:hal} presentando en el congreso Computer Graphics and Visual Computing en 2017.
+
+Esta contribución surge como colaboración con \emph{Franck P. Vidal}, el cual dirige un proyecto de simulación de rayos X \emph{gVirtualXRay} \cite{gVirtualXRay}. Esta colaboración dio lugar al segundo caso de uso de esta tesis. Se puede consultar en el anexo \ref{anexo:cguk}. En este artículo, se presentó las posibilidades de la librería de \emph{gVirtualXRay} para ser utilizada como simulador de radiología que será finalmente completada con la publicación del artículo en progreso llamado: \emph{``Interactive learning environment for diagnostic radiographywith real-time X-ray simulation and patient positioning"} con intención de ser publicado en la revista impactada Computerized Medical Imaging and Graphics en un futuro cercano. Se puede consultar su manuscrito en el anexo \ref{anexo:xray}.
+
+
+
+
+
+
+
+\subsection{Contribuciones técnicas}
+\label{conclu:tecnica}
+
+%Our technical contributions can be summarised as follow:
+
+%Las contribuciones tecnicas son los simuladores y las herramientas. 1. Herramienta de poses. Integración en el sistema de generación de pacientes virtuales. 2. cOURWARE DE RASIMAS. 3. Colaboraste en la integración de RASim. Propuesta de prototipo sin haptico que si conto con un opinon positiva de los medicos (!!!). Di que reescribiste los drivers del haptico
+
+%4. Simulador de rayos x: Sistema de pose, integracion con el simulador del rayos x, courseware.
+
+%\todo{Aqui no hables de paper. Habla de herramientas desarrolladas, librerias: Libreria de posing, integradada con GMRVGL (libreria de render desarrollada en el grupo), herramienta de posing. Integracion de la herramienta de creacion de pacientes virtuales. Integración de RASim. Adapatacion del prototipo a Flockof birds (has reescrito los drivers). Herramienta de radiologia diagnostica.}
+
+\textbf{ Sistema } Librería de posicionamiento de pacientes virtuales.
+
+A partir de la librería de \emph{render} \emph{GMRVGL} desarrollada por el grupo de investigación \ac{GMRV} de la \ac{URJC}, se desarrolló el cauce del algoritmo propuesto. Se desarrolló una \ac{IU} que permite al usuario adaptar la posición de manera sencilla, dando lugar también a la herramienta \ac{TPTVPH} que se incorporó en la \emph{suite} \ac{ITGVPH}.
+
+\textbf{ Sistema } Courseware de \ac{RASim}
+
+Se ha desarrollado una aplicación de autoevaluación y aprendizaje del procedimiento de \ac{RA}. Esta aplicación dirige al usuario a través del procedimiento, mientras coordina todos los módulos del simulador en función del tipo de entrenamiento. Debido a esto, se ha colaborado activamente en la integración del prototipo \ac{RASim}.
+
+\textbf{ Sistema } Controlador \emph{Flock of birds} 
+
+Con el objetivo de proponer una solución alternativa a los dispositivos hápticos defectuosos, se propuso la utilización de \acs{tracker}s magnéticos. El único dispositivo disponible en la \ac{URJC} era el \emph{Flock of birds}, el cual no contaba con soporte para sistemas operativos modernos. Se reimplementó los controladores de este dispositivo para poder comunicarse con el módulo \emph{H3D} encargado de la comunicación de los dispositivos y su representación en la escena virtual.
+
+
+\textbf{ Sistema } Simulador de radiología diagnóstica
+
+Junto con la librería de posicionamiento de paciente virtuales y la librería \emph{gVirtualXRay} se ha desarrollado un simulador de radiología diagnóstica que permite a estudiantes y profesores conseguir la radiografía de un paciente virtual mientras seleccionan la postura adecuada. Se trabajó conjuntamente con el Dr. Franck P. Vidal para incorporar las modificaciones necesarias en \emph{gVirtualXRay} para compartir la memoria en \acs{GPU}. 
+
+
+
+
+
+%\todo{Mete como contribucion cientifica el ultimo paper, ponlo como apendice y di que está pendiente de publicar. }
+
+
+\section{Limitaciones y líneas futuras}
+\label{conclu:future}
+
+\subsection{Algoritmo de posicionamiento de pacientes virtuales}
+
+La principal limitación que presenta el algoritmo de posicionamiento de pacientes virtuales es la utilización de un enfoque geométrico. Como tal, los resultados que proporcionan son heurísticos y no físicamente correctos. Esta característica impide que pueda emplearse para planificación quirúrgica o en aquellos lugares que necesiten un comportamiento fiel a la realidad. Por ejemplo, no se tienen en cuenta efectos como la gravedad en los tejidos internos, lo cual generaría transformaciones en los tejidos anatómicos diferentes si el paciente virtual se encontrara de pie o tumbado. 
+
+Otra limitación es la necesidad de que existan unas estructuras mínimas. El algoritmo requiere por diseño que los tejidos de la piel y los huesos estén correctamente identificados. Aun así, estos tejidos son los más habituales que se pueden capturar en muchas de las imágenes médicas, por tanto, servirán para guiar el proceso e identificar algunos puntos claves para el correcto funcionamiento del algoritmo.
+    
+Debido a que la extracción de los tejidos desde imágenes médicas no es perfecta, una situación crítica son las auto colisiones y colisiones entre tejidos. Aunque el algoritmo es robusto al tratamiento de estas, no está diseñado para resolver colisiones. Aunque aquellos tejidos que traspasen la piel son irreales, se tratarán como el resto de tejidos sin poder asegurar una deformación realista.
+    
+%El algoritmo utilizar un esqueleto virtual para definir los movimientos de las articulaciones. Se utilizará la información que proporciona los tejidos óseos para construir un esqueleto virtual adecuado al modelo de entrada. La principal limitación es la selección manual de las zonas identificadas que se necesitan para identificar los puntos de rotación de la articulación y su sistema de referencia.
+
+
+%Aún así, los resultados obtenidos son lo suficientemente plausibles para proporcionar un método que consiga generar modelos anatómicos en el contexto de entrenamiento médico.
+
+Se puede destacar que el diseño seguido del cauce de animación esqueletal permite actualizar los algoritmos utilizados en cada etapa independientemente. En el futuro pueden sustituirse etapas por nuevos métodos que permitan mejorar los resultados. 
+
+Por ejemplo, en la etapa de \emph{rigging}, la principal limitación es la selección manual de las zonas identificadas que se necesitan para calcular los puntos de rotación de la articulación y su sistema de referencia. Se podría desarrollar un método que extrajera el esqueleto virtual automáticamente basándose en el tejido óseo del paciente virtual, inspirado en el trabajo de \cite{Tagliasacchi}.
+
+En cuanto la etapa de pesado, se podría analizar si la incorporación de técnicas de pesado más complejas como
+\cite{Jacobson:2011} ofrecerían mejores resultados.
+
+Un objetivo para mejorar la calidad de los modelos anatómicos generados es la búsqueda de nuevas técnicas de \emph{skinning}. Podría buscarse métodos que pudieran solventar los problemas de las auto colisiones como \cite{Vaillant:2014}.
+
+En la selección de poses, la técnica de cinemática inversa \cite{Shi:2007} se podría añadir de manera trivial para mejorar la interacción del usuario con el sistema. Otra alternativa sería incorporar movimientos de articulaciones más complejos \cite{joints} que las simples rotaciones.
+
+Incluso, se podría incorporar nuevos métodos basados en físicas como los prometedores métodos \emph{Point-Based Dynamics}  \cite{abu2015position} que permitan animación en tiempos interactivos y la caracterización mecánica de los tetraedros.
+
+
+
+
+\subsection{RASimAs}
+
+Gracias a que los distintos módulos han sido evaluados por parte de los médicos y el prototipo ha obtenido una satisfactoria validez de contenido, el proyecto \ac{RASimAs} fue calificado de manera favorable. Aun así, la finalización del proyecto y la falta de fondos han hecho imposible la realización de más validaciones de constructo, concurrente y predictiva en un entorno clínico.    %Se espera poder solucionar los defectos que presentan los dispositivos o incorporar otros diferentes con el fin de poder llevar el simulador a los entornos clínicos.
+
+La principal limitación del prototipo \ac{RASim} es que dispone solamente de un caso de bloqueo de nervio. Si bien el caso del bloqueo femoral, es el más común de los practicados por los anestesistas, una de las previsiones del proyecto era la posibilidad de entrenar varios tipos de bloqueos. La finalización  de la \emph{suite} \ac{ITGVPH} debería suplir la falta de modelos para utilizar en otros bloqueos.
+
+Por otra parte, la suma de los módulos software que se están ejecutando al mismo tiempo junto con la propia complejidad de estos, hacen que el coste computacional sea muy alto. La consecuencia es la utilización de mallas groseras y con poco detalle. Esta limitación ha impedido que se incorporaran efectos físicos como la hidrosección o difusión del analgésico. Como posible solución, se podría mejorar la comunicación e integración entre los módulos software.
+
+El propio dispositivo háptico presenta un limitado espacio de trabajo que restringe los movimientos de los usuarios. Aunque existen dispositivos con un rango de alcance más amplio, su  alto coste hace que el dispositivo actual sea la mejor opción una vez resueltos sus defectos de fábrica.
+
+%Además, este entorno se podría adaptar a otro tipo de procedimientos médicos. 
+
+En cuanto al módulo \ac{Courseware}, su limitación recae en su desarrollo específico para el procedimiento de \ac{RA}.   %Aun así, se diseñó para cargar el material multimedia externamente, por lo cual, además se podría reutilizar aquellas funcionalidades para que solo fuera necesario generar nuevo contenido. 
+Aun así, podría reciclarse todo lo relacionado a cargar el material multimedia externamente, y también sería posible adaptar las ayudas de usuario ya desarrolladas para otro tipo de procedimientos. Finalmente, esto implicaría del mismo modo la necesidad de volver a definir nuevas métricas interesantes específicamente para el nuevo entrenamiento.
+
+
+Por último hay que destacar que en \ac{RASim} no se tienen en cuenta algunos procedimientos protocolarios. La preparación de la sala o el instrumental médico son aspectos importantes del procedimiento, lo cual se podría incorporar mediante interacción del usuario con el escenario virtual. Otro aspecto fundamental del procedimiento es la técnica aséptica o la aplicación del gel para la sonda de \ac{US}. Como primera opción, podría implementarse un efecto de pintado en la piel del paciente virtual utilizando los propios dispositivos del simulador. 
+
+
+\subsection{Simulador de radiología diagnóstica}
+
+Aunque la aplicación se ha diseñado para satisfacer las necesidades de los radiólogos, presenta ciertas limitaciones respecto al procedimiento de diagnóstico por imagen radiológica. Existen cuestiones relacionadas con la preparación del paciente para el procedimiento que no pueden ser cubiertas por el simulador, que se pueden ver a continuación:
+
+\begin{itemize}
+    \item Se recomienda utilizar un lenguaje apropiado y efectivo en la comunicación con los pacientes que no es posible recoger por el simulador.
+    \item No se representa la necesidad de indicar al paciente acerca de quitarse prendas u objetos que afecten al área de examen.
+    \item No se practican las recomendaciones en cuanto al uso de protectores de plomo para pacientes y profesionales.
+    \item Otras comprobaciones que implican condiciones médicas o protocolarias como embarazo, identificación del paciente, etcétera.
+\end{itemize}
+Podría valorarse incluir una serie de preguntas acerca de un informe médico creado para el paciente virtual, o incluir un reconocimiento de voz para practicar el lenguaje utilizado. 
+
+Además, el simulador cuenta con las limitaciones propias de los módulos por los que está compuesto. Todas las mejoras introducidas en el algoritmo propuesto que tengan relación con la calidad de las transformaciones, serán beneficiosas para conseguir imágenes anatómicamente correctas. Por ejemplo, el tratamiento de las autocolisiones o la correcta deformación de los tejidos según el paciente virtual se encuentre de pie o decúbito.
+
+
+Por otra parte, se encuentran las propias limitaciones de la librería \emph{gVirtualXRay}. La configuración de la intensidad \acs{mAs} de la máquina de rayos X no está incorporada en el sistema, y es un parámetro importante para los radiólogos con el fin de mejorar la calidad de la radiografía. En un principio, se ha introducido un ruido de \emph{Poisson}, pero este método no es capaz de simular todos los valores de intensidad utilizados en la realidad. La característica determinista de la librería no hace posible una solución sencilla.
+
+Para aumentar la cantidad de pacientes virtuales disponibles para la herramienta, se podría actualizar la librería para incorporar la funcionalidad de producir radiografías con modelos volumétricos, representaciones que el algoritmo propuesto si puede manejar.
+
+Otra funcionalidad extra que se podría incluir en el simulador, es la medición de la dosis recibida por el paciente. Existen actualmente simuladores de dosis y calculadoras \emph{online} \cite{xraydose}, que podrían ser incorporadas al simulador.
+
+Incluso, sería posible incorporar otras técnicas de imagen médica que puedan ser simuladas. Se podría ampliar el abanico de tecnologías de diagnóstico por imagen (p. ej. \acs{IRM}, \acs{US} o \acs{TC}) que requieran posicionar al paciente virtual obteniendo una imagen médica al instante, lo cual podría derivar en una nueva línea de investigación.
+
+
+
+
+
+
+
+
+
+

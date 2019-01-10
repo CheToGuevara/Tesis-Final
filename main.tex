@@ -1,0 +1,88 @@
+\documentclass[12pt,a4paper,twoside,english]{book}
+
+\usepackage{Formato}
+
+\title{Subject posing in patient specific simulators}
+\author{Aaron Sújar}
+
+\begin{document}
+
+\frontmatter
+\input{Portada.tex}
+
+\pagenumbering{roman}
+\clearpage
+\include{CitayAgra}
+
+\include{Resumen}
+
+\include{Summary}
+
+\include{Acronyms}
+
+\tableofcontents
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries}{}{0pt}{\huge\thechapter. }
+
+\listoffigures
+ 
+\listoftables
+
+\mainmatter
+
+%%%% INTRODUCCiÓN
+\input{Introduccion}
+\input{Hipotesis}
+\input{Objetivos}
+\input{Contribucciones}
+\input{organizacion}
+
+%%%% Antecedentes
+\input{related}
+\input{simulators}
+\input{Learning}
+\input{anestesiaregional}
+\input{radiologia}
+\input{contextorasimas}
+\input{animation}
+
+%%%% Posing
+\input{introaposing}
+\input{methodposing}
+
+%%%%% RASIMAS
+\input{introrasim}
+\input{herramienta}
+\input{rasim}
+\input{courseware}
+
+%%%% XRAY
+\input{introxray}
+\input{overxray}
+
+%%%% RESULT
+\input{introresult}
+\input{resultsposing}
+\input{rasimasresults}
+\input{xrayresults}
+
+%%%% Conclusiones
+\input{conclusion}
+\input{contribucion}
+
+%%%% ANEXOS
+\input{anexos.tex}
+
+
+
+
+%\appendix
+%\include{appendix}
+\cleardoublepage
+% Como incorporar como un capitulo mas en el indice de la bibliografia
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+\bibliography{bibintro,bibarte,bibposing,bibrasimas,bibxray,bibresult,bibconclu}
+%\bibliography{bibliography}
+\bibliographystyle{alpha}
+\end{document}

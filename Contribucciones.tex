@@ -1,0 +1,60 @@
+\section{Contribuciones}
+\label{intro:contribuciones}
+
+La principal contribución de esta tesis es la presentación de un algoritmo geométrico que permite modificar un modelo de paciente virtual de una postura original a la posición requerida por cualquier simulador. Este algoritmo ha sido diseñado, creando y adaptando técnicas establecidas en el cauce clásico de la animación esqueletal, pero permite animar tanto los modelos superficiales clásicos como los tejidos internos de un modelo de un paciente virtual.
+
+El algoritmo propuesto es capaz de solucionar dos grandes problemas que un usuario se puede encontrar al animar anatomía humana. Por una parte, esta técnica es capaz de manejar datos incompletos, tanto por la imposibilidad de capturar todos los tejidos dentro de la anatomía, %\todo{parece que hay gente que va por ahí sin pulmones} 
+como por la falta de una descripción mecánica de los tejidos a animar. Esta característica ayuda a resolver casos donde los modelos procedentes de imágenes médicas %\ac{parciales}\todo{lo de locales no está suficientemente justificado}
+no contengan la descripción del paciente al completo. Por otra parte, esta técnica permite animaciones en tiempo real para que sea posible incorporarlo en cualquier simulador. El algoritmo es lo suficientemente rápido para mover la anatomía de un modelo de cuerpo entero permitiendo tasas interactivas al usuario.
+
+Con el objetivo de demostrar la utilidad de la técnica propuesta, se ha procedido a incorporarla en dos simuladores médicos como ejemplos de casos de uso. 
+
+\subsection{Contribuciones a RASimAS}
+
+%\todo{Creo que le falta peso al curseware. YO DARIA PESO AL COURSEWARE AQUÍ NO EN LOS OBJETIVOS. LO MISMO EN EL SIMULADOR DE RAYOS X}
+%es una de las motivaciones\todo{así suena raro} y parte financiadora de esta tesis,\todo{dos frases} el algoritmo propuesto es una parte importante dentro de la consecución del simulador que representa uno de los dos pilares del proyecto europeo.  
+
+%\del{ \ac{TPTVPH} donde se encuentra varios procesos, desde el registro de los datos del paciente pasando por el proceso de completar los tejidos, la definición de las propiedades mecánicas para poder crear el \ac{VPH} y por último, el posicionamiento del modelo a la postura requerida para cada procedimiento.}\todo{falso el TPTVPH es nuestra herramienta}
+
+La participación en el proyecto \ac{RASimAs} es el punto de partida del desarrollo de esta tesis. Se ha contribuido con la creación de un algoritmo que permite la adaptación de un \ac{VPH}, de una postura inicial a una final, de manera automática o supervisada por un experto.
+El algoritmo propuesto ha sido integrado dentro del entorno \ac{ITGVPH}.
+Esta herramienta proporciona los modelos que se van a utilizar en \ac{RASim}, permitiendo un entrenamiento del procedimiento de \ac{RA} con una base de datos de pacientes que disponga de una amplia variabilidad anatómica.
+
+Por otra parte, también se ha contribuido en la creación del módulo \ac{Courseware}, que gestiona todos los componentes del simulador y se encarga de implementar todas las tareas de relacionadas con el entrenamiento. \ac{RASim} se compone de varios módulos software:
+\begin{enumerate}
+    \item El módulo de ultrasonidos \cite{Law2015} encargado de simular el proceso de generación de la imagen de \ac{US} que se usa para guiar la aguja a su objetivo.
+    \item El módulo de la simulación física que se ha implementado extendiendo la funcionalidad de la librería \ac{SOFA} \cite{sofaweb} y que se encarga de modelar el comportamiento de la aguja con \cite{needleinsertion}, de sus interacciones con los tejidos del paciente y de dar una respuesta háptica.
+    \item \emph{H3D} \cite{sensegraphics2012open} es el módulo encargado de la visualización de la escena virtual y la comunicación de los dispositivos.
+    \item El \ac{Courseware}, que proporciona una plataforma de aprendizaje donde el usuario podrá practicar y desarrollar sus habilidades no cognitivas.
+\end{enumerate}
+%\new{(i) ; (ii) ; y del (iii) .}    
+Desde la \ac{URJC} se ha liderado el proceso de integración del \ac{Courseware} en el simulador, debido a que es necesario una continua comunicación entre los módulos anteriormente citados y la plataforma de entrenamiento. El \ac{Courseware} gestionará los distintos módulos citados con la finalidad de permitir un entrenamiento autónomo y de proporcionar retroalimentación formativa y sumativa, gracias a las métricas recogidas a través de estos módulos.
+
+En las últimas etapas del proyecto, el comité médico del proyecto no valoró positivamente la correspondencia entre dispositivos de entrada, no siendo posible su evaluación clínica. Debido a problemas de precisión de los dispositivos hápticos (presentaban defectos de fábrica), los médicos consideraron que podría introducir sesgos en los aprendices. A partir de una propuesta de la \ac{URJC}, se procedió a sustituir los dispositivos hápticos por unos \acs{tracker}s magnéticos que permitió conseguir una evaluación favorable por parte de los evaluadores.
+
+
+% \todo{Explicar que:
+% 1. El grupo de la URJC a liderado el proceso de integración.
+% 2. Qué la plataforma haptica no contó on el visto bueno de los medicos implicados en proyecto. (Explica los problemas)
+% 3. Indica que como parte de está tesis sutituiste el modulo haptico por un sistema basado en tracker magenticos que si conto con la aprobación de los medicos. }
+
+
+\subsection{Simulador de radiología diagnóstica}
+%El algoritmo presentado en esta tesis permite ser incorporado en cualquier simulador que requiera transformar la postura de un modelo anatómico con estructuras internas interactivamente.
+%\todo{es muy repetitivo}
+Como resultado de la colaboración con el Dr. Franck P. Vidal, se ha desarrollado un simulador de radiología diagnóstica con la librería \emph{gVirtualXray} \cite{sujar:hal} y el algoritmo propuesto. Esta herramienta interactiva permite practicar las proyecciones radiológicas de manera segura y sin necesidad de pacientes reales.  El simulador podrá ser usado tanto por los profesores como por los estudiantes de radiología, complementando así el material utilizado en clase. Con el objetivo de practicar con una amplia variabilidad anatómica, el algoritmo propuesto ofrece la posibilidad de incorporar modelos de pacientes virtuales creados externamente. Para ello, cuenta con un preproceso que permite preparar los pacientes virtuales para el algoritmo teniendo unos requisitos mínimos. Esta etapa se ejecuta de manera automática y solo se ejecuta una vez por modelo.
+
+%\todo{Indica que gracias a la flexibilidad del algoritmo de posing se han integrado distintos modelos creados por terceros y que el simulador permite la incorporación de nuevos modelos con un numero de restricciones mínimas, aplicando un pre-proceso en su mayor parte automatico.}
+
+
+
+%\todo{intenta acortar la frase.}
+Al igual que \ac{RASim}, se ha desarrollado un \ac{Courseware} que permite al usuario practicar el procedimiento de forma guiada y autónoma a la vez que permite al profesor diseñar ejercicios de clase. Finalmente, se realizó un estudio para validar su utilidad en el que 18 participantes realizaron una encuesta donde se les enseñaba las distintas funcionalidades del simulador y se les preguntaba acerca de su opinión. Los resultados obtenidos sugieren que el simulador es lo suficientemente realista para que sea útil como herramienta de enseñanza y entrenamiento del procedimiento.
+%\todo{Yo también explicaría que el simulador esta pensado como herramienta de clase puesto que su uso como entranador 
+
+%\todo{Si conseguimos la validación la ponemos aquí}
+%\todo{requeriria una validación que va más allá del ambito de esta tesis aunque la funcionalidad de entrenamiento ha sido implementada. Aaron: Al final no he validado nada entonces? Quizás sea mejor no ponerlo aquí}
+%\todo{Explica un poco el curseware y/o los modos de funcionamiento...}
+
+
+%cuales son mis contribuciones al simulador y que módulos han sido cogidos 

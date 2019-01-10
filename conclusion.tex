@@ -1,0 +1,152 @@
+\chapter{Conclusiones}
+\label{cap:conclu}
+
+\section{Algoritmo de posicionamiento de pacientes virtuales}
+\label{conclu:posing}
+
+En la actualidad, la \ac{RV} está demostrando su potencial como herramienta de entrenamiento en el campo de la medicina. %En este contexto, el algoritmo propuesto ofrece la posibilidad de adaptar la postura de cualquier paciente virtual a la posición requerida por el procedimiento médico que se va a simular.
+En esta tesis se ha presentado un cauce de animación esqueletal semiautomático que permite transformar cualquier paciente virtual con estructuras internas a la posición requerida en el entrenamiento de un determinado procedimiento médico.
+
+Esta técnica sigue un enfoque geométrico y, por tanto, proporciona una solución heurística que no refleja  el comportamiento físico de los tejidos. Aunque recientemente las simulaciones músculo-esqueléticos han avanzado mucho en el mundo de los gráficos por computador, estas técnicas requieren de una descripción tanto mecánica como geométrica, detallada y completa de los tejidos a animar, las cuales en ocasiones no se encuentran disponibles. 
+%quitar salto de párrafo
+%El algoritmo propuesto ofrece dos ventajas claves. Primero, su flexibilidad a la hora de transformar un paciente virtual junto con sus tejidos internos aunque estos se encuentren incompletos o falte su descripción mecánica. Segundo, su selección de poses se ejecuta con tasas de refresco interactivas. 
+
+Una de las ventajas del algoritmo propuesto es que se diseñó con el objetivo de ser lo más flexible posible, minimizando los requisitos de los datos de entrada. La clave de esta flexibilidad radica en que se calcula un campo de deformaciones continuo dentro del modelo anatómico. Este campo permite adaptar cualquier tejido a la pose deseada, de forma independiente al resto de tejidos, pudiendo así trabajar con modelos incompletos. En este sentido, la única limitación que se impone es que tanto la piel como el tejido óseo del paciente virtual deben de estar segmentados. Esta restricción no debería suponer un gran problema, dado que estos tejidos son visibles en la mayor parte de las técnicas de imagen médica. Además, tal y como se muestra en la sección \ref{posing:animvol}, este campo de deformaciones puede aplicarse tanto a \acs{B-rep}s como a datos volumétricos. De esta manera, se ha extendiendo el alcance de la técnica propuesta.
+
+La utilización del campo de deformaciones aporta beneficios adicionales. Debido a que la extracción de los tejidos desde imágenes médicas no es perfecta, pueden aparecer auto colisiones y colisiones entre tejidos. La técnica propuesta no solventa estas colisiones, pero es robusta en su tratamiento. Aun así, especialmente las colisiones con el tejido óseo y con la piel pueden provocar una importante pérdida de realismo. Evitar colisiones y autocolisiones en los tejidos transformados es de vital importancia de cara a garantizar el buen funcionamiento del simulador físico del prototipo y conseguir imágenes más realistas tanto por el módulo de simulación de \ac{US} de \ac{RASim} como por la librería \emph{gVirtualXRay} en el simulador de radiología diagnóstica. %De esta forma, solo podrán aparecer colisiones y/o autocolisiones si: (i) se utilizan mallas para representar los tejidos con una resolución inadecuada o (ii) si existen colisiones y/o autocolisiones en el modelo virtual de partida. 
+Cabe destacar que, a pesar de esta circunstancia, la técnica propuesta es mucho más robusta, en este escenario, que en los métodos basados en simulación física. %En la sección \ref{posing:method}, se proponen técnicas para mitigar estos problemas. 
+
+
+
+
+% El algoritmo se ha diseñado para ser robusto y poder adaptar la posición de cualquier modelo anatómico. Además, se permite utilizar tanto mallas superficiales como modelos volumétricos. Únicamente, se considera necesario el tejido óseo y la piel del modelo anatómico debido a que la animación se dirige por los huesos que contenga el paciente virtual.
+%quitar salto de párrafo
+%Las primeras etapas de este cauce se realizan en un preproceso automático que generan la información necesaria para que, a continuación, el usuario pueda seleccionar la postura del paciente virtual interactivamente.
+
+La otra ventaja que presenta el algoritmo propuesto es su eficiencia computacional que permiten utilizarlo en aplicaciones interactivas. Se ha diseñado el cauce de tal forma que las etapas que no pueden ejecutarse en tiempo real se realicen de forma automática en preproceso, permitiendo así, que el usuario pueda seleccionar la pose del paciente virtual en interactivamente.
+%Yo quitaría esta última frase. No se muy bien que aporta. 
+% \del{Cabe destacar las innovaciones incluidas en cada etapa del cauce de animación esqueletal.}
+
+Las etapas del cauce propuesto son suficientemente flexibles como para poder adaptarse a una gran diversidad de problemas, siendo la fase de \emph{rigging} la que más limitaciones impone debido a que es una solución específica diseñada para integrase en el generador de pacientes virtuales de \ac{RASim}. Aun así, este método puede ser fácilmente extendido, siempre y cuando se pueda establecer una correspondencia directa entre el tejido óseo y el esqueleto virtual.
+%ampliado, aunque el único requerimiento es haya una una correspondencia directa entre el hueso virtual y los tejidos óseos  presentes en el modelo anatómico. Si no fuera así, se podría generar deformaciones no realistas.
+
+La etapa de volumetrización consiste en discretizar el interior del modelo para obtener una malla de tetraedros que será la base del campo de deformaciones anteriormente citado.
+
+En cuanto a la fase de pesado, se ha basado en la propuesta de \emph{Baran y Popovi\'{c}}. En \cite{Baran:2007} se proponía utilizar la ecuación de difusión del calor para calcular los pesos automáticamente. En el cauce propuesto, esta ecuación ha sido adaptada para ser utilizada en mallas volumétricas en comparación con las mallas superficiales usadas originalmente. Además, se utiliza la geometría del tejido óseo del modelo anatómico en lugar de la geometría del esqueleto virtual.
+
+%Hay que señalar los resultados obtenidos en la fase de \emph{skinning}. 
+La etapa de \emph{skinning} consigue tasas de refresco interactivas altas, incluso en modelos con alto grado de detalle. Frente a los métodos basados en modelos físicos más eficientes \cite{Bender:2014}, el algoritmo propuesto ofrece un mejor rendimiento utilizando mallas de un orden de magnitud superior. Entre las técnicas de \emph{skinning} disponibles, se ha elegido \ac{COR} \cite{le2016real} debido a que soluciona los defectos más comunes de las técnicas \ac{LBS} \cite{thalmann88} y \ac{DQS} \cite{Kavan2008}. Esta técnica ha sido adaptada para tratar las mallas de tetraedros, por lo cual se ha incorporado una etapa de cálculo de \acl{COR} al cauce. Aun así, el cauce permite incorporar cualquier técnica de \emph{skinning} basada en pesos.
+%Esta complejidad es en ocasiones de un orden superior en comparación con los métodos de animación basados en físicas. 
+%Por una parte, modelos precisos raramente consiguen tiempos interactivos, y por otra parte, recientemente aparecidos modelos basados en dinámicas de puntos usan modelos mucho más complejos para ser interactivos  \cite{abu2015position}.
+%Quitar salto de parrafo
+%\todo{Comenta algo de la adapatación de CoR, porque se escogio esta técnica y comenta que puede utilizarse cualquier técnica de skinning basada en pesos.}
+
+
+Siendo conscientes de las limitaciones de estos métodos %de \emph{skinning}, 
+se incorporó una fase de optimización que pretendía mejorar los resultados obtenidos. Esta etapa consiste en utilizar un modelo matemático basado en mecánica de medios continuos, con el único objetivo de garantizar la conservación del volumen.
+%Sin poder utilizar propiedades mecánicas  del modelo, el objetivo era garantizar la conservación del volumen en la malla volumétrica. 
+%Esta etapa podría ser modificada para tomar en cuenta las propiedades mecánicas de los tejidos en el momento de generar la malla volumétrica y así poder mejorar el realismo del método.
+
+Es importante también tener en cuenta que una solución heurística no produce resultados físicamente correctos. Es por esta razón que esta técnica no es adecuada para planificación quirúrgica. Sin embargo, los entrenadores médicos no necesitan específicamente modelos de pacientes reales sino una muestra variada de modelos anatómicos que permitan entrenar casos plausibles. Estos modelos se podrán utilizar en herramientas educativas y de aprendizaje para formar a estudiantes de una manera innovadora que no proporcionan los materiales clásicos como los libros.
+%Sin salto de parrafo
+
+Para demostrar las distintas capacidades del algoritmo propuesto, se han presentado dos casos de uso que permiten comprobar la viabilidad y la utilidad del algoritmo propuesto en soluciones de \ac{RV} reales. 
+%
+Por una parte, se ha incorporado el algoritmo en una \emph{suite} de aplicaciones que permite crear una base de datos de pacientes virtuales.
+%incorporados en el simulador \ac{RASim}. 
+\ac{ITGVPH} crea modelos que representen distintas  variaciones anatómicas registrando un modelo de paciente virtual e imágenes médicas provenientes de pacienes reales. 
+%procedentes del registro entre un modelo comercial e imágenes médicas. 
+El algoritmo permite 
+%modificar % no se modifica "a", se adapta "a"
+adaptar la postura de este modelo a la requerida por el simulador.
+%
+Por otra parte, el algoritmo se ha incorporado en un simulador de radiología diagnóstica. Esta aplicación requiere que el usuario modifique la pose del modelo virtual de forma interactiva como parte del procedimiento simulado a la vez que permite observar la radiografía en tiempo real. %\del{que necesita deformaciones en tiempo real y permitan al usuario interaccionar con los modelos virtuales.}
+
+
+Por último, aunque los casos de uso están orientados en el área de la medicina, esta técnica no está limitada a este ámbito en concreto, sino que podría ser empleada para animar modelos anatómicos con estructuras internas en otras áreas como los videojuegos, la industria del cine, etcétera.
+ 
+
+\section{RASimAs}
+
+
+\subsection{ITGVPH}
+\label{conclu:herramienta}
+
+% \todo{indica que has creado un la aplicación de selección de poses que usa tu algoritmo. Indica que has trabajado en en la integración del entorno.}
+
+El objetivo de la \emph{suite} \ac{ITGVPH} es generar una base de datos de \ac{VPH} usados por el simulador \ac{RASim} con la finalidad de entrenar con una variabilidad anatómica extensa.
+\ac{ITGVPH} es capaz de generar nuevos \ac{VPH} a partir de modelos anatómicos virtuales existentes y de imágenes médicas que proporcionen variabilidad anatómica.  
+Se ha trabajo en el desarrollo y la integración de la herramienta \ac{TPTVPH} en la \emph{suite}, la cual proporciona una \ac{IU} al algoritmo propuesto. En esta, se permite adaptar interactivamente la postura del \ac{VPH} a la posición requerida por el procedimiento que se va a entrenar.
+ 
+% Esta herramienta proporcionaría la ventaja de permitir a los estudiantes practicar con multitud de escenarios de forma segura. La creación una base de datos con pacientes virtuales puede ser clave en la mejora de los simuladores de \ac{RV} para el campo de la medicina. 
+
+%Esta herramienta está compuesta por tres módulos desarrollados por separado. Uno de ellos es el algoritmo de posicionamiento de pacientes virtuales que se ha presentado en esta tesis. Estos módulos han sido creados de manera independiente.
+ %Por último, se generarán tanto los modelos superficiales como volumétricos con los parámetros físicos que se quieran simular. Estos modelos describen al \ac{VPH} anatómicamente y mecánicamente para que puedan ser utilizados en el proyecto europeo. Además, esta herramienta permite la ejecución en serie o de manera independiente los módulos. Debido a que en ocasiones pueda ser posible utilizar ciertas etapas sin necesidad de ejecutar el cauce completamente.
+
+Debido a que se requiere limitar la interacción del usuario con un perfil no técnico, se ha automatizado todas las etapas de \ac{ITGVPH} excepto la selección de poses. Al basarse en un método geométrico, es responsabilidad del profesional clínico seleccionar transformaciones útiles para el entrenamiento.   Según los parámetros de entrada, la \emph{suite} ejecuta los distintos módulos secuencialmente, requiriendo la interacción del usuario para seleccionar la postura del paciente virtual en la herramienta \ac{TPTVPH}. El supervisor clínico puede generar tantas posturas como sea necesario a través de la \ac{IU} que muestra la escena 3D donde se puede observar el paciente virtual. Incluso, se puede ejecutar la fase de optimización para refinar el resultado. Una vez adaptado el \ac{VPH}, la \emph{suite} continua con la ejecución de las tareas restantes para generar los modelos necesarios que se utilizarán en el simulador \ac{RASim}.
+
+
+%En esta, se puede configurar las etapas de manera independiente. El usuario es capaz de seleccionar el modelo anatómico de referencia (p. ej Zygote), las imágenes médicas en formato \ac{DICOM} (p. ej imágenes de \ac{IRM}), la postura necesaria para el procedimiento y, por último, especificar parámetros biomecánicos. 
+%Las posturas de los \ac{VPH} son definidas por un En esta interfaz, el usuario podrá interaccionar con las articulaciones disponibles para generar unas posiciones físicamente correctas.
+
+\subsection{RASim}
+\label{conclu:rasim}
+
+% \todo{3 Apunta en las conclusiones una discusión sobre los problemas de RAsimas que se alcanzo que no y porque.}
+
+
+El simulador \ac{RASim} proporciona un entorno de entrenamiento completo y realista para el entrenamiento del procedimiento de \ac{RA} guiado por \ac{US}. Este simulador cuenta con una mesa de trabajo donde el usuario puede realizar el procedimiento con instrumentos que imitan un entrono real.
+En los monitores podrá supervisar la interacción de estos y el paciente, mientras puede observar la imagen simulada de \ac{US}. El estudiante podrá realizar las fases de exploración, guiado de la aguja e inyección del procedimiento de \ac{RA}. Una contribución de esta tesis ha sido el diseño y desarrollo del módulo  \ac{Courseware}, el cual gestiona todos los componentes del simulador. Este módulo es el encargado de proveer una plataforma de entrenamiento y autoevaluación, guiando al estudiante en su proceso de aprendizaje. Este módulo también monitoriza métricas de rendimiento con el objetivo de ofrecer retroalimentación formativa y sumativa. 
+
+%\todo{
+%Aaron tienes que ser mas estructurado. Te pongo las ideas que tienes que contar y tu las das formas:
+%1. Dos objetivos importantes:
+%1.1 Proporcionar retroalimentacion haptica. Es importante porque ayuda a localizar la aguja
+%.2 Mantener el precio del simulador bajo. 
+%2. Se escogió el dispositivo phantom (deberías haberlo contarlo en Rasimas cuando) proporcionar un dispositivo haptico de bajo precio. Cumple los dos objetivos
+% 3. Se encontraron problemas en los nuevos dispositovos (pon un anexo con la carta de  Geomagic indicando el error). Yo daria detalles explicando los problemas de precisión.
+% 4. Esto problema impidieron la validación del prototipo y por lo tanto de la hipótesis. 
+%5. La URJC y el doctorando apataron apataron el prototipo para utilizar un dispositivo flock of birds. 
+%Este dispositivo no proporciona retroalimentacion haptica pero es muy precsiso. 
+%6. Los socios medicos validaron este prototipo a pesar de no tener retroalimentación.
+%7. Lamentablemente se consumieron los plazos y puedo concluierse el resto de evaluaciones que estaban probramadas quedandonos soloamanete con el visto bueno de los socioes medicos. }
+
+Uno de los objetivos del simulador \ac{RASim} era poder simular la sensación háptica de la aguja. Esta funcionalidad era muy esperada por los socios médicos, porque esto implicaría ayudar a los estudiantes a ser más eficientes en el procedimiento. Se seleccionó el dispositivo háptico \emph{Touch} como solución de bajo coste para la devolución de fuerzas al usuario.  
+
+Desafortunadamente, este dispositivo mostró defectos de fábrica (ver sec. \ref{result:rasim}), que se traducía en una falta de correspondencia entre la posición de los instrumentos virtuales y los dispositivos. Esto impidió que los médicos permitieran su utilización por parte de los estudiantes.  
+%
+Desde la \ac{URJC} se trabajó para proponer una solución utilizando \acs{tracker}s magnéticos. Aunque estos dispositivos no proporcionan retroalimentación háptica son muy precisos y, de esta manera, los estudiantes podrían practicar sus habilidades propioceptivas. Los socios médicos dieron el visto bueno a esta alternativa ante la falta de un dispositivo háptico. 
+
+Lamentablemente, aunque se pudieron concluir las evaluaciones programadas de los distintos componentes del simulador habiendo recibido el visto bueno de los socios médicos, se consumieron los plazos del proyecto europeo que finalizó sin poder realizar el ensayo clínico.%, con la cual permitiría asegurar que el simulador \ac{RASim} proporcionaría un entorno de entrenamiento completo para estudiantes o profesionales de la anestesia. 
+
+%a través de los dispositivos utilizados en el simulador permiten hacerse una idea de que se van a encontrar en un procedimiento real. 
+
+Es importante comentar el resultado final de la evaluación de la comisión europea sobre el proyecto \ac{RASimAs}. El comité evaluador calificó el proyecto con un \emph{progreso aceptable} debido a las dificultades para finalizar la evaluación clínica. Los problemas inesperados fueron los determinantes para que esta evaluación no pudiera hacerse en el tiempo esperado. Aun así, se valoró muy positivamente el módulo de \ac{RAAs} y el estado del prototipo final de \ac{RASim}. El propio comité animó a seguir con los trabajos necesarios que hagan falta para la finalización del \ac{RASim} y que pueda ser utilizado en entornos reales para el beneficio de los estudiantes de anestesiología.
+
+
+\section{Simulador de radiología diagnóstica }
+\label{conclu:xray}
+
+Se ha presentado un simulador de radiología diagnóstica que permite enseñar y aprender el procedimiento de las proyecciones radiológicas en un entorno seguro. Los técnicos de radiología deben conocer como colocar al paciente y configurar la máquina de rayos X para evitar repeticiones del procedimiento y reducir la dosis de radiación que recibe el paciente.
+%innecesaria para el paciente. 
+%De esta manera, el simulador proporciona  donde el procedimiento puede ser ensayado sin ningún riesgo para el médico o pacientes. 
+
+Este simulador está compuesto por el algoritmo de posicionamiento de pacientes y la librería \emph{gVirtualXRay}. Gracias a la interactividad de la selección de poses del algoritmo y la generación de imágenes en rayos X en tiempo real, se permite adaptar la postura del paciente virtual mientras se visualiza su radiografía. De esta manera, el usuario tiene la posibilidad de seleccionar infinidad de posturas del modelo anatómico interactivamente frente a los métodos clásicos como pueden ser los libros o archivos de casos y a los simuladores introducidos en la sección \ref{art:entrenamiento}.
+
+Además, esta herramienta también demuestra la versatilidad del algoritmo presentado en esta tesis. Se puede incorporar cualquier paciente virtual del que se dispongan al menos el tejido óseo y la piel. El algoritmo permitirá animar el modelo anatómico aunque este se encuentre incompleto. Solo la calidad de la imagen radiográfica dependerá de la calidad del modelo de entrada.
+
+Esta aplicación se ha desarrollado para servir como herramienta complementaria para el aprendizaje y la docencia del procedimiento. % de realizar proyecciones radiológicas. 
+En este simulador, el usuario puede practicar las proyecciones radiológicas seleccionando la postura del paciente virtual interactivamente y sus tejidos internos mientras ve una imagen radiográfica en tiempo real. 
+
+Es importante destacar que el simulador propuesto no sustituye el método tradicional de enseñanza, sino que mejora el proceso de aprendizaje al proporcionar un entorno interactivo. Frente a los archivos educativos y los libros que proporcionan los conocimientos teóricos, los simuladores permiten practicar el procedimiento interactivamente para conseguir mejorar las habilidades no cognitivas. En este simulador, el usuario puede replicar cualquier proyección que pueda leer de un libro, pero a la vez, se permite interaccionar con el mismo paciente virtual, variar configuraciones de la maquina de rayos X e, incluso, generar enfermedades en el modelo anatómico.
+
+Las validaciones de apariencia y de contenido realizadas (ver sec. \ref{xray:validacion}) permiten confirmar la utilidad como herramienta de entrenamiento. Los resultados muestran una herramienta educativa que puede ser usada como material complementario para los estudiantes de radiología. La aplicación proporciona un entorno seguro e interactivo para comprobar todo tipo de situaciones.
+
+%Este simulador es una unión entre el algoritmo de posicionamiento de pacientes virtuales y la librería de simulación de rayos X. Este algoritmo es susceptible de ser modificado para mejorar las limitaciones que vienen acompañadas del uso de una técnica geométrica.  
+
+
+
+
+
+
+
