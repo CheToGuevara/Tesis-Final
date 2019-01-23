@@ -21,12 +21,13 @@
 \include{Acronyms}
 
 \tableofcontents
-\titleformat{\chapter}[hang]
-  {\normalfont\bfseries}{}{0pt}{\huge\thechapter. }
+
 
 \listoffigures
  
 \listoftables
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries}{}{0pt}{\huge\thechapter. }
 
 \mainmatter
 
@@ -67,8 +68,8 @@
 \input{xrayresults}
 
 %%%% Conclusiones
-\input{conclusion}
-\input{contribucion}
+\input{engconclusion}
+\input{engcontribution}
 
 %%%% ANEXOS
 \input{anexos.tex}
@@ -80,6 +81,8 @@
 %\include{appendix}
 \cleardoublepage
 % Como incorporar como un capitulo mas en el indice de la bibliografia
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries}{}{0pt}{\huge}
 \addcontentsline{toc}{chapter}{Bibliografía}
 
 \bibliography{bibintro,bibarte,bibposing,bibrasimas,bibxray,bibresult,bibconclu}

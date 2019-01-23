@@ -55,12 +55,12 @@ Como se puede observar, la calidad de la imagen radiográfica depende de la cali
 %     \item Cortical: tejido denso que se encuentra en la capa externa de los huesos.
 %     \item Trabecular: capa esponjosa que se encuentra en el interior de los huesos.
 % \end{itemize}
-En la mayoría de los casos, concretamente en los modelos comerciales, las mallas superficiales no representan correctamente los tejidos anatómicos del cuerpo humano. Esto, en el caso particular del simulador de radiología,  puede dar lugar a generación de imágenes poco realistas. 
+En la mayoría de los casos, concretamente en los modelos comerciales, las mallas superficiales no representan correctamente los tejidos anatómicos del cuerpo humano. Esto, en el caso particular del simulador de radiología,  puede dar lugar a la generación de imágenes poco realistas. 
 
-En concreto, los modelos anatómicos comerciales utilizados, se proporciona solamente una representación  superficial de los huesos (cortical \footnote{Tejido denso que se encuentra en la capa externa de los huesos.}) y suelen ignorar los tejidos internos (trabecular\footnote{Capa esponjosa que se encuentra en el interior de los huesos.}). Como consecuencia de la ausencia de los tejidos internos, \emph{gVirtualXRay} no tiene en cuenta el interior y genera un tejido óseo homogéneo. 
+En concreto, los modelos anatómicos comerciales utilizados, proporcionan solamente una representación superficial de los huesos (cortical \footnote{Tejido denso que se encuentra en la capa externa de los huesos.}) y suelen ignorar los tejidos internos (trabecular\footnote{Capa esponjosa que se encuentra en el interior de los huesos.}). Como consecuencia de la ausencia de los tejidos internos, \emph{gVirtualXRay} no tiene en cuenta el interior y genera un tejido óseo homogéneo. 
 Esta librería se basa en la funcionalidad de un trazador de rayos, por lo cual se calcula el recorrido del rayo a través de las estructuras anatómicas, entrando por la cara frontal del triángulo y saliendo por la cara trasera de otro triángulo de la misma malla. Este recorrido sirve para calcular la atenuación del rayo dependiendo de las propiedades físicas del material y de la longitud del recorrido del rayo. Al solo traspasar el tejido superficial, sin interacción con ninguna estructura interna, el tejido óseo aparece totalmente sólido en la imagen de rayos X resultante, dando lugar a una imagen no realista (ver fig.~\ref{subfig:nointernal}) que los médicos interpretan como una calcificación del hueso.
 
-Con el objetivo de mejorar la representación de las zonas trabeculares, se ha desarrollado una pequeña modificación en el simulador. Cuando se carga el tejido óseo, se duplica su malla superficial, en la cual se invierten las normales y se encoge la geometría en esa dirección. De esta manera, se crea una estructura interna con una forma similar al hueso. En la figura ~\ref{fig:bonecompare} se puede observar la diferencia entre el modelo original y los tejidos modificados incluyendo las zonas trabeculares. Este problema no ocurre cuando los modelos anatómicos son obtenidos de técnicas como la \ac{TC} donde ambos tejidos son fácilmente identificables. Es el caso del modelo \emph{Segmented Inner Organs}\cite{VoxelMan}, que se puede observar en la figura \ref{subfig:HVP}.
+Con el objetivo de mejorar la representación de las zonas trabeculares, se ha desarrollado una pequeña modificación en el simulador. Cuando se carga el tejido óseo, se duplica su malla superficial, en la cual se invierten las normales y se encoge la geometría en esa dirección. De esta manera, se crea una estructura interna con una forma similar al hueso. En la figura \ref{fig:bonecompare} se puede observar la diferencia entre el modelo original y los tejidos modificados incluyendo las zonas trabeculares. Este problema no ocurre cuando los modelos anatómicos son obtenidos de técnicas como la \ac{TC} donde ambos tejidos son fácilmente identificables, como es el caso del modelo \emph{Segmented Inner Organs}\cite{VoxelMan} que se puede observar en la figura \ref{subfig:HVP}.
 
 
 
@@ -81,9 +81,9 @@ Con el objetivo de mejorar la representación de las zonas trabeculares, se ha d
    \end{figure}
 
 
-Frente a un libro tradicional de proyecciones radiológicas donde se muestran unas imágenes estáticas, 
+Frente a un libro tradicional de proyecciones radiológicas, donde se muestran unas imágenes estáticas, 
 el simulador desarrollado permite al estudiante interaccionar con un modelo anatómico.
-Como se puede observar en la figura \ref{fig:xraycomp}, se ha seleccionado una proyección radiológica procedente de \cite{carver2012medical} y se ha procedido a replicar la misma posición en la herramienta. El simulador ofrece la ventaja de poder obtener más imágenes y/o proyecciones adicionales del mismo paciente virtual, que resultaría imposible si quisiese obtenerse de un paciente real debido a su peligrosidad. Por tanto, se  permite a profesores y estudiantes practicar de manera más extensa con un mismo modelo anatómico en un entorno completamente seguro.
+Como se puede observar en la figura \ref{fig:xraycomp}, se ha seleccionado una proyección radiológica procedente de \cite{carver2012medical} y se ha procedido a replicar la misma posición en la herramienta. El simulador ofrece la ventaja de poder obtener más imágenes y/o proyecciones adicionales del mismo paciente virtual, que resultaría imposible si se quisiese obtener de un paciente real debido al riesgo de sobre-exposición a los rayos X. Por tanto, se  permite a profesores y estudiantes practicar de manera más extensa con un mismo modelo anatómico en un entorno completamente seguro.
 
 
 % \begin{figure}[tb]
@@ -107,7 +107,7 @@ Como se puede observar en la figura \ref{fig:xraycomp}, se ha seleccionado una p
     \caption{\label{fig:xraycomp} Comparativa entre una imagen del libro \cite{carver2012medical} y la imagen resultante del simulador.}
    \end{figure}
 
-Otra muestra de las ventajas del simulador frente a los materiales educativos tradicionales se puede observar en la figura \ref{fig:diseaseresult}. En esta ocasión, el simulador permite generar variaciones del mismo modelo anatómico. Con ello, se pueden enseñar como se manifestaría una enfermedad y, por tanto, ayudar a la interpretación de una imagen radiológica en el futuro. Cambiando unos pocos parámetros, el simulador permite cambiar entre un tejido sano o enfermo. Incluso puede ser interesante que los estudiantes puedan observar como se distinguen objetos extraños cuando se encuentran dentro de la anatomía del paciente. A través de la \ac{IU}, se podrá rotar el paciente virtual para conseguir una radiografía desde distintos ángulos de vista frente a la imagen estática mostrada en los archivos educativos y repositorios.
+Otra muestra de las ventajas del simulador frente a los materiales educativos tradicionales se puede observar en la figura \ref{fig:diseaseresult}. En esta ocasión, el simulador permite generar variaciones del mismo modelo anatómico. Con ello, se puede enseñar como se manifestaría una enfermedad y, por tanto, ayudar a la interpretación de una imagen radiológica en el futuro. Cambiando unos pocos parámetros, el simulador permite cambiar entre un tejido sano o enfermo. Incluso puede ser interesante que los estudiantes puedan observar como se distinguen objetos extraños cuando se encuentran dentro de la anatomía del paciente. A través de la \ac{IU}, se podrá rotar el paciente virtual para conseguir una radiografía desde distintos ángulos de vista frente a la imagen estática mostrada en los archivos educativos y repositorios.
 
 \begin{figure}[ht]
 \begin{subfigure}[b]{0.3\linewidth}
@@ -139,7 +139,7 @@ Otra muestra de las ventajas del simulador frente a los materiales educativos tr
 \clearpage
 \subsection{Rendimiento}
 
-Al igual que en la sección \ref{posing:result}, el cauce de animación propuesto se han delegado las etapas más costosas computacionalmente a un preproceso. Esto permite que, junto con los datos auxiliares generados, la selección de poses y por tanto el simulador pueda ser interactivo. A su vez, ambos algoritmos (posicionador de pacientes virtuales y la librería de simulación de rayos X) comparten memoria en \acs{GPU} para mejorar la eficiencia y poder ejecutarse interactivamente. En el peor de los casos, el modelo de \emph{ZygoteBody}$^{TM}$ y su malla de tetraedros se componen de $1.5$ millones de vértices y $2.5$ millones de tetraedros. En la tabla \ref{tab:xraytime}, se pueden consultar el tiempo empleado en milisegundos por cada etapa utilizando los modelos \emph{ZygoteBody}$^{TM}$ Masculino y Femenino, Anatomium y la representación superficial del Segmented Inner Organs. La tabla muestra los valores máximos y mínimos de tiempo que tarda en ejecutar cada módulo, siendo capaz de mantenerse por encima de las $25$ imágenes por segundo.
+Al igual que en la sección \ref{posing:result}, en el cauce de animación propuesto se han delegado las etapas más costosas computacionalmente a un preproceso. Esto permite que, junto con los datos auxiliares generados, la selección de poses y por tanto el simulador pueda ser interactivo. A su vez, ambos algoritmos (posicionador de pacientes virtuales y la librería de simulación de rayos X) comparten memoria en \acs{GPU} para mejorar la eficiencia y poder ejecutarse interactivamente. En el peor de los casos, el modelo de \emph{ZygoteBody}$^{TM}$ y su malla de tetraedros se componen de $1.5$ millones de vértices y $2.5$ millones de tetraedros. En la tabla \ref{tab:xraytime}, se pueden consultar el tiempo empleado en milisegundos por cada etapa utilizando los modelos \emph{ZygoteBody}$^{TM}$ Masculino y Femenino, \emph{Anatomium} y la representación superficial del \emph{Segmented Inner Organs}. La tabla muestra los valores máximos y mínimos de tiempo que tarda en ejecutar cada módulo, siendo capaz de mantenerse por encima de las $25$ imágenes por segundo.
 
 
 
@@ -157,9 +157,9 @@ Al igual que en la sección \ref{posing:result}, el cauce de animación propuest
 \hline
 \emph{ZygoteBody}$^{TM}$ Femenino  & 29-21  & 23-17    \\ 
 \hline
-Anatomium   & 20-13 & 21-18 \\ 
+\emph{Anatomium }  & 20-13 & 21-18 \\ 
 \hline
-Segmented Inner Organs   & 17-08 & 15-12 \\ 
+\emph{Segmented Inner Organs}   & 17-08 & 15-12 \\ 
 \hline
 \end{tabular}
 \label{tab:xraytime}
@@ -170,11 +170,11 @@ Segmented Inner Organs   & 17-08 & 15-12 \\
 
 \subsection{Validación}
 \label{xray:validacion}
-Para comprobar la validez aparente y de contenido del simulador se ha diseñado un estudio, donde se ha pedido a los participantes observar una serie de vídeos que describían las funcionalidades del simulador. A continuación, se les hacía unas preguntas referentes al vídeo y al simulador. Se ha seleccionado como población objetivo el conjunto de especialistas relacionados con la técnica de radiología. En los cuales, se buscaba contar con la opinión de estudiantes y profesionales, incluyendo varios países. La encuesta se puede consultar en el anexo \ref{anexo:cuestionarioxray}.
+Para comprobar la validez aparente y de contenido del simulador se ha diseñado un estudio, donde se ha pedido a los participantes observar una serie de vídeos que describían las funcionalidades del simulador. A continuación, se les hacían unas preguntas referentes al vídeo y al simulador. Se ha seleccionado como población objetivo el conjunto de especialistas relacionados con la técnica de radiología, entre los cuales, se buscaba contar con la opinión de estudiantes y profesionales procedentes de varios países. La encuesta se puede consultar en el anexo \ref{anexo:cuestionarioxray}.
 %
-Al finalizar la encuesta, se han registrado 18 participaciones (con un $50\%$ de mujeres y hombres): donde 16 de ellos han seleccionado la categoría profesional \emph{técnico en radiología} mientras que el resto son otro tipo de profesional médico que trabajan con imágenes radiológicas; de 4 países diferentes (15 de Reino Unido, 1 de Francia, 1 de Canadá y 1 de España); con años de práctica de radiología entre 1 y 40 años (ver figura \ref{fig:year}).
+Al finalizar la encuesta, se han registrado dieciocho participaciones (con un $50\%$ de mujeres y hombres): donde dieciséis de ellos han seleccionado la categoría profesional \emph{técnico en radiología} mientras que el resto son otro tipo de profesional médico que trabajan con imágenes radiológicas; de cuatro países diferentes (quince de Reino Unido, uno de Francia, uno de Canadá y uno de España); con años de práctica de radiología entre 1 y 40 años (ver figura \ref{fig:year}).
 %
-En el formulario, se incluía una pregunta sobre la confianza del participante a la hora de tomar una imagen de rayos X. Tal y como se ve en la figura \ref{fig:confident}, muestra un amplio número de participantes que reflejan una alta confianza en sus habilidades.
+En el formulario, se incluía una pregunta sobre la confianza del participante a la hora de tomar una imagen de rayos X. Tal y como se ve en la figura \ref{fig:confident}, un amplio número de participantes reflejan una alta confianza en sus habilidades.
 %
 Por otra parte, también se incluía la pregunta sobre la confianza del participante en sus habilidades para interpretar la radiografía con fines de diagnóstico médico. En la figura \ref{fig:interpreting} se muestra el histograma con los resultados. En este caso, hay más variabilidad en las respuestas.
 
@@ -207,11 +207,11 @@ Por otra parte, también se incluía la pregunta sobre la confianza del particip
 
 En cuanto a la validez aparente, se han incluido en la encuesta las preguntas de la tabla \ref{tab:facevalidity}. Estas preguntas eran de tipo \emph{Likert}, donde se podía responder con valores comprendidos desde 1 (Nada de acuerdo) hasta 5 (Muy de acuerdo). 
 
-En la figura \ref{fig:facevalidity}, se pueden observar los resultados por cada pregunta mostrados en porcentaje de respuestas. Es destacable que en general, hay al menos un 60\% de respuestas positivas en todas las preguntas y ninguna respuesta completamente negativa, excepto la pregunta F3. Esta pregunta trata sobre la descripción de los pasos que debe realizar un médico cuando está realizando el procedimiento. Cuando en la sección \ref{art:xraysim} se describió los pasos del procedimiento de proyecciones radiológicas, en el propio libro \cite{manualpractico} se advertía sobre las posibles variaciones dependiendo del lugar de trabajo.  
+En la figura \ref{fig:facevalidity}, se pueden observar los resultados, por cada pregunta, mostrados en porcentaje de respuestas. Es destacable que en general, hay al menos un 60\% de respuestas positivas en todas las preguntas y ninguna respuesta completamente negativa, excepto la pregunta F3. Esta pregunta trata sobre la descripción de los pasos que debe realizar un médico cuando está realizando el procedimiento. Cuando en la sección \ref{art:xraysim} se describieron los pasos del procedimiento de proyecciones radiológicas, en el propio libro \cite{manualpractico} se advertía sobre las posibles variaciones dependiendo del lugar de trabajo.  
 
 \begin{figure}[hb]
     \centering
-    \includegraphics[trim={15mm 25mm 15mm 25mm},clip,width=\linewidth]{IMG/facevalidty.pdf}
+    \includegraphics[trim={15mm 25mm 15mm 25mm},clip,width=0.9\linewidth]{IMG/facevalidty.pdf}
     \caption{Gráfica que muestra los porcentajes de respuestas tipo \emph{Likert} en las preguntas de validez aparente.}
     \label{fig:facevalidity}
 \end{figure}
@@ -249,11 +249,11 @@ En la figura \ref{fig:facevalidity}, se pueden observar los resultados por cada 
 
 Las preguntas relativas a la validez de contenido se pueden leer en la tabla \ref{tab:contentvalidity}. Al igual que el caso anterior, estas preguntas eran de tipo \emph{Likert}, donde se podía responder con valores comprendidos desde 1 (Nada de acuerdo) hasta 5 (Muy de acuerdo).
 
-En la figura \ref{fig:contentvalidity}, se pueden observar los resultados por cada pregunta mostrados en porcentaje de respuestas. Los resultados son parecidos a la validez de apariencia, donde se han registrado al menos un 60\% de respuestas positivas en todas las preguntas. 
+En la figura \ref{fig:contentvalidity}, se pueden observar los resultados por cada pregunta mostrados en porcentajes de respuestas. Los resultados son parecidos a la validez de apariencia, donde se han registrado al menos un 60\% de respuestas positivas en todas las preguntas. 
 
 \begin{figure}[hb]
     \centering
-    \includegraphics[trim={15mm 25mm 15mm 25mm},clip,width=\linewidth]{IMG/contentvalidty.pdf}
+    \includegraphics[trim={15mm 25mm 15mm 25mm},clip,width=0.9\linewidth]{IMG/contentvalidty.pdf}
     \caption{Gráfica que muestra los porcentajes de respuestas tipo \emph{Likert} en las preguntas de validez de contenido.}
     \label{fig:contentvalidity}
 \end{figure}
@@ -285,7 +285,7 @@ En la figura \ref{fig:contentvalidity}, se pueden observar los resultados por ca
     \label{tab:contentvalidity}
 \end{table}
 
-Los resultados obtenidos sugieren que el simulador de radiología diagnóstica es visualmente realista. En general, todas las funcionalidades han obtenido una valoración positiva. Además, aunque se registraron pocos comentarios libres, estos comentarios eran positivos. Esto sugiere que, aunque los modelos anatómicos presenten problemas de calidad, el algoritmo de posicionamiento de pacientes virtuales genera posturas útiles para el entrenamiento. A la vista de la mayoría de participantes, el simulador proporciona las funcionalidades y el realismo necesarios para entrenar el procedimiento. En cuanto a la validez de contenido, las respuestas han sido mayormente positivas, indicando que el simulador es útil para la enseñanza y entrenamiento del procedimiento. 
+Los resultados obtenidos sugieren que el simulador de radiología diagnóstica es visualmente realista. En general, todas las funcionalidades han obtenido una valoración positiva. Además, aunque se registraron pocos comentarios libres, estos comentarios eran positivos. Esto sugiere que, aunque los modelos anatómicos presenten problemas de calidad, el algoritmo de posicionamiento de pacientes virtuales genera posturas útiles para el entrenamiento. En opinión de la mayoría de participantes, el simulador proporciona las funcionalidades y el realismo necesarios para entrenar el procedimiento. En cuanto a la validez de contenido, las respuestas han sido mayormente positivas, indicando que el simulador es útil para la enseñanza y entrenamiento del procedimiento. 
 
 % \subsection{Discusión}
 % \label{xray:discusion}
@@ -302,4 +302,4 @@ Los resultados obtenidos sugieren que el simulador de radiología diagnóstica e
 %     \item Otras comprobaciones que implican condiciones médicas o protocolarias como embarazo, identificación del paciente, etc...
 % \end{itemize}
 
-En resumen, a la vista de los resultados de las validaciones realizadas, los profesionales han valorado positivamente el simulador. Esto confirma que el simulador puede ser utilizado como herramienta de clase por parte de los profesores, como por el alumnado para practicar el procedimiento. 
+En resumen, a la vista de los resultados de las validaciones realizadas, los profesionales han valorado positivamente el simulador. Esto permite confirmar que el simulador puede ser utilizado como herramienta de clase por parte de los profesores, o para practicar el procedimiento por parte del alumnado. 

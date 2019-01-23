@@ -11,14 +11,14 @@ Todos los elementos anteriormente citados conforman un simulador de \ac{RV} por 
 
 % \subsection{Caso de uso}
 % \label{course:casodeuso}
-El simulador estará emplazado en un centro de entrenamiento de profesionales de anestesia como una universidad o un hospital. Los usuarios utilizan el simulador con el objetivo de mejorar sus habilidades en el contexto de \ac{RA} y se pueden dividir entre estudiantes y profesionales. Los primeros utilizarán la herramienta para empezar su formación en \ac{RA}. Para los usuarios con conocimientos del procedimiento, la herramienta les ayudará a mejorar sus habilidades no cognitivas. Incluso, se espera que lo utilicen aquellos profesionales que están interesados en volver a practicar el procedimiento debido a que llevan tiempo apartados de su práctica.
+El simulador estará emplazado en un centro de entrenamiento de profesionales de anestesia como una universidad o un hospital. Los usuarios que utilizarán el simulador con el objetivo de mejorar sus habilidades en el contexto de \ac{RA}  se pueden dividir entre estudiantes y profesionales. Los primeros utilizarán la herramienta para empezar su formación en \ac{RA}. Para los usuarios con conocimientos del procedimiento, la herramienta les ayudará a mejorar sus habilidades no cognitivas. Incluso, se espera que lo utilicen aquellos profesionales que están interesados en volver a practicar el procedimiento debido a que llevan tiempo apartados de la práctica.
 
 
-El objetivo principal de la aplicación es la práctica de \ac{RA} en simulador orientado a dos perfiles de profesionales sanitarios:
+El objetivo principal de la aplicación es la práctica de \ac{RA} en un simulador orientado a dos perfiles de profesionales sanitarios:
 \begin{itemize}
-    \item Estudiantes noveles: como herramienta de aprendizaje, la aplicación está orientada a introducir el procedimiento a nuevos anestesistas. Por tanto, es necesario que el entrenamiento sea inicialmente guiado, ofreciendo información adicional a lo largo del procedimiento. Será necesario un modo guiado que ayude al estudiante en el procedimiento de \ac{RA} paso por paso y pueda ofrecer ayuda si el usuario la requiere. El objetivo es que el usuario pueda mejorar sus habilidades cognitivas como las no cognitivas. Además, el software recabará medidas de desempeño para que posteriormente puedan formar parte de una evaluación. Al final de la sesión, el sistema podrá mostrar los registros obtenidos sirviendo como evaluación formativa.
+    \item Estudiantes noveles: como herramienta de aprendizaje, la aplicación está orientada a introducir el procedimiento a nuevos anestesistas. Por tanto, es necesario que el entrenamiento sea inicialmente guiado, ofreciendo información adicional a lo largo del procedimiento. Será necesario un modo guiado que ayude al estudiante en el procedimiento de \ac{RA} paso por paso y pueda ofrecer ayuda si el usuario la requiere. El objetivo es que el usuario pueda mejorar sus habilidades cognitivas como las prácticas. Además, el software recabará medidas de desempeño para que posteriormente puedan formar parte de una evaluación. Al final de la sesión, el sistema podrá mostrar los registros obtenidos sirviendo como evaluación formativa.
 
-\item Profesionales con conocimientos previos: el simulador puede ayudar a sanitarios que quieran practicar o mejorar sus habilidades no-cognitivas. Como estos usuarios pueden tener conocimientos previos de \ac{RA}, se les permitirá saltarse el modo guiado ofreciéndole un modo sin restricciones. En este modo el usuario podrá actuar de manera libre mientras que el sistema registrará su rendimiento. Este podrá ser mostrado al final de la sesión que al igual que el modo guiado se podrá usar como evaluación formativa para el usuario.
+\item Profesionales con conocimientos previos: el simulador puede ayudar a sanitarios que quieran practicar o mejorar sus habilidades no-cognitivas. Como estos usuarios pueden tener conocimientos previos de \ac{RA}, se les permitirá saltarse el modo guiado ofreciéndole un modo sin restricciones. En este modo el usuario podrá actuar de manera libre mientras que el sistema registrará su rendimiento. Este podrá ser mostrado al final de la sesión, que al igual que el modo guiado, se podrá usar como evaluación formativa para el usuario.
 
 \end{itemize}
 
@@ -57,9 +57,9 @@ A continuación, se detallarán los requisitos que vienen dados por el proyecto 
 La arquitectura de la aplicación se ha diseñado de la siguiente manera (ver fig. \ref{fig:coursearq}):
 \begin{itemize}
     \item \ac{Courseware}: el módulo principal se encarga de gestionar los módulos software del simulador. Este módulo guía al usuario en el proceso favoreciendo el aprendizaje con retroalimentación formativa y sumativa mientras registra el rendimiento del usuario.% e incluso implementa un sistema de reconocimiento de voz
-    \item Interfaz: este módulo se encarga de las ventanas que se mostrarán al usuario. Por una parte, se refiere a los menús iniciales para acceder al sistema y navegar a través del material multimedia. Por otra parte, se encarga de la vista del \ac{Courseware} durante el procedimiento y del resumen final.
+    \item Interfaz: este módulo maneja las ventanas que se mostrarán al usuario. Por una parte, se refiere a los menús iniciales para acceder al sistema y navegar a través del material multimedia. Por otra parte, se encarga de la vista del \ac{Courseware} durante el procedimiento y del resumen final.
 
-\item Sistema comunicación: este módulo se encarga de las comunicaciones con el servidor para recuperar o actualizar el perfil del usuario, escenas, modelos anatómicos, material multimedia. El \ac{Courseware} mandará la evolución de los usuarios para que quede almacenado.
+\item Sistema comunicación: este módulo se centra en las comunicaciones con el servidor para recuperar o actualizar el perfil del usuario, escenas, modelos anatómicos, material multimedia. El \ac{Courseware} mandará la evolución de los usuarios para que quede almacenada.
 \end{itemize}
 
 
@@ -67,14 +67,14 @@ Estos componentes del \ac{Courseware} se comunican con ciertos módulos externos
 
 \begin{itemize}
     
-    \item \emph{H3D}: se comunicará con la simulación visual, con el objetivo de modificar y añadir ayudas visuales al usuario que se incorporarán en el modo guiado. Además, a través de este módulo se gestionará la comunicación de los dispositivos y del módulo de simulación \acs{SOFA}. En ocasiones, como pueden ser el principio del procedimiento o fases de explicación, el \ac{Courseware} deshabilita ciertas comprobaciones que posibilitan al usuario adecuarse a los instrumentos. Así pues, hasta que el usuario no decide empezar con el ejercicio, no se recibe ninguna respuesta física por parte del dispositivo. Otro ejemplo de interacción con los módulos es la inclusión de ayudas visuales que se incorporarán a la simulación visual. Zonas iluminadas o figuras geométricas que ayudarán al usuario a entender los conceptos y pasos que deberá cumplir para finalizar el procedimiento. 
+    \item \emph{H3D}: se comunica con la simulación visual, con el objetivo de modificar y añadir ayudas visuales al usuario que se incorporarán en el modo guiado. Además, a través de este módulo se gestiona la comunicación de los dispositivos y del módulo de simulación \acs{SOFA}. En ocasiones, como pueden ser el principio del procedimiento o fases de explicación, el \ac{Courseware} deshabilita ciertas comprobaciones que posibilitan al usuario adecuarse a los instrumentos. Así pues, hasta que el usuario no decide empezar con el ejercicio, no se recibe ninguna respuesta física por parte del dispositivo. Otro ejemplo de interacción con los módulos es la inclusión de ayudas visuales que se incorporarán a la simulación visual. Zonas iluminadas o figuras geométricas que ayudarán al usuario a entender los conceptos y pasos que deben cumplir para finalizar el procedimiento. 
     
-    \item Módulo de \ac{US}: el \ac{Courseware} está en todo momento comunicado con la simulación de \ac{US} para recuperar la imagen a mostrar, además de recuperar información adicional para la evaluación del sistema. El objetivo de que la comunicación con el módulo de \ac{US} sea directa, es mostrar la imagen en la vista del \ac{Courseware} directamente. Esta imagen también se utilizará para comprobar errores o ayudar al usuario con información superpuesta.
+    \item Módulo de \ac{US}: el \ac{Courseware} está en todo momento comunicado con la simulación de \ac{US} para recuperar la imagen a mostrar, además de recuperar información adicional para la evaluación del sistema. El objetivo de que la comunicación con el módulo de \ac{US} sea directa, es mostrar la imagen en la vista del \ac{Courseware} directamente. Esta imagen también se utilizará para comprobar errores y/o ayudar al usuario con información superpuesta.
     
     %\item \textbf{\acs{SOFA}}: El \ac{Courseware} es el encargado de seleccionar y especificar la escena que utilizará el módulo de simulación física. Así, se podrán recuperar métricas y variar parámetros de la simulación.
 
 
-\item Servidor local: se recuperará la información necesaria para iniciar el simulador. Por otra parte, se enviarán los datos recopilados del rendimiento del usuario.
+\item Servidor local: se recupera la información necesaria para iniciar el simulador. Por otra parte, se envía los datos recopilados del rendimiento del usuario.
 
 
 \end{itemize}
@@ -90,15 +90,15 @@ Estos componentes del \ac{Courseware} se comunican con ciertos módulos externos
 
 \subsection{Modos de simulación}
 \label{course:modos}
-Uno de los objetivos del \ac{Courseware} es el entrenamiento del procedimiento de \ac{RA} adaptándose al perfil del usuario. La aplicación proporciona dos modos de sesiones para adaptar la simulación a las necesidades del usuario. Los modos de simulación se definirán a continuación:
+Uno de los objetivos del \ac{Courseware} es el entrenamiento del procedimiento de \ac{RA} adaptándose al perfil del usuario. La aplicación proporciona sesiones en dos modos diferentes para adaptar la simulación a las necesidades del usuario. Los modos de simulación se definirán a continuación:
 
 \begin{itemize}
-    \item El modo guiado está diseñado para usuarios con poco conocimiento del procedimiento. Además, también puede servir para anestesistas que no hayan practicado el procedimiento por un tiempo y necesita familiarizarse con el simulador antes de utilizar el modo libre. %Parece evidente que usuarios con experiencia en \ac{RA} necesiten algunas sesiones guiadas para sentirse cómodos en la utilización del simulador. 
+    \item El modo guiado está diseñado para usuarios con poco conocimiento del procedimiento. Además, también puede servir para anestesistas que no hayan practicado el procedimiento por un tiempo y necesitan familiarizarse con el simulador antes de utilizar el modo libre. %Parece evidente que usuarios con experiencia en \ac{RA} necesiten algunas sesiones guiadas para sentirse cómodos en la utilización del simulador. 
 El modo guiado está diseñado para dirigir a los usuarios a través del procedimiento. El usuario será dirigido a través de pasos consecutivos hasta finalizar el procedimiento completo, estando limitado a realizar la tarea que se le indica. El modo guiado mostrará continuamente retroalimentación durante la sesión con el objetivo de ayudar al usuario.%  y se almacenarán métricas de evaluación que serán actualizadas en el perfil del usuario y mostradas al final de la sesión.
 
 \item En el modo libre, el usuario puede realizar el procedimiento sin ninguna restricción y sin ninguna ayuda auxiliar por parte del \ac{Courseware}. Este modo está orientado a que los usuarios puedan practicar sus habilidades no cognitivas en el procedimiento de \ac{RA}. 
 
-La interfaz de usuario mostrada por la aplicación será más simple que el modo guiado, ya que no se guía al usuario a través del procedimiento. Por tanto, este modo no proporcionará ninguna información de apoyo y está orientada a recoger únicamente métricas del rendimiento del usuario en la sesión. Registrar estos parámetros presenta una dificultad extra, debido a que el usuario no está restringido como en el modo anterior. %Aún así, se recogerán las métricas de elementos críticos del procedimiento como la inserción de la aguja.
+La interfaz de usuario mostrada por la aplicación será más simple que el modo guiado, ya que no se guía al usuario a través del procedimiento. Por tanto, este modo no proporcionará ninguna información de apoyo y está orientada a recoger únicamente métricas del rendimiento del usuario en la sesión. Registrar estos parámetros presentan una dificultad extra, debido a que el usuario no está restringido como en el modo anterior. %Aún así, se recogerán las métricas de elementos críticos del procedimiento como la inserción de la aguja.
 
 \end{itemize}
 
@@ -114,7 +114,7 @@ En ambos modos de simulación, al finalizar la sesión, el usuario podrá observ
 
 \subsection{Interfaz de usuario}
 \label{course:ui}
-El \ac{Courseware} como responsable de supervisar a los otros módulos de simulación, se encargará de mostrar a los usuarios las ventanas con las que va a interaccionar. En la figura \ref{fig:simui} se puede observar las imágenes que se \emph{renderizarán} en cada monitor. En la imagen de la izquierda se puede observar la vista de paciente donde se puede apreciar la sala de operaciones virtual generada por el software \emph{H3D}. En la imagen de la derecha, se puede observar la interfaz del \ac{Courseware} cuando la simulación ya ha empezado. En ella se puede observar la imagen de \ac{US} acompañados de elementos que proporcionan información al usuario. A continuación, se describirán las interfaces por separado.
+El \ac{Courseware}, como responsable de supervisar a los otros módulos de simulación, se encargará de mostrar a los usuarios las ventanas con las que va a interaccionar. En la figura \ref{fig:simui} se pueden observar las imágenes que se \emph{renderizarán} en cada monitor. En la imagen de la izquierda se observa la vista de paciente donde se puede apreciar la sala de operaciones virtual generada por el software \emph{H3D}. En la imagen de la derecha, se muestra la interfaz del \ac{Courseware} cuando la simulación ya ha empezado. En ella se puede observar la imagen de \ac{US} acompañados de elementos que proporcionan información al usuario. A continuación, se describirán las interfaces por separado.
 
 % \begin{figure}[ht]
 %     \centering
@@ -151,7 +151,7 @@ El primer contacto que tiene el usuario con el \ac{Courseware} es a través de l
 
 \subsubsection{Modo guiado}
 
-Como la finalidad de los dos modos de simulación son diferentes, las interfaces que presenta la aplicación son diferentes. En el modo guiado se proporciona información al usuario mientras que en el modo libre no existen ningún tipo de ayuda.
+Como la finalidad de los dos modos de simulación son diferentes, las interfaces que presenta la aplicación son diferentes. En el modo guiado se proporciona información al usuario mientras que en el modo libre no existe ningún tipo de ayuda.
 
 El modo guiado está orientado para guiar al usuario a lo largo del procedimiento de \ac{RA}. Por tanto, además de representar la información de \ac{US}, tiene que mostrar la información sobre las tareas que se están realizando. Se visualizará una lista de tareas del bloque actual y de la tarea en curso. Además, se muestra la ayuda específica de esa tarea al usuario. En la figura \ref{fig:guidedui}, se observa un ejemplo de interfaz en una sesión guiada.
 \begin{figure}[ht]
@@ -192,7 +192,7 @@ El modo guiado está orientado para guiar al usuario a lo largo del procedimient
 
 En este modo, el sistema no debe presentar ninguna información de apoyo al usuario. Por tanto, la interfaz del \ac{Courseware} se  encargará solo de mostrar la imagen de \ac{US} y su panel de control como se puede observar en la figura \ref{fig:freeui}.
 
-\begin{figure}[hb]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{IMG/freeui.PNG}
     \caption{Instantánea de la interfaz del modo libre.}
@@ -205,7 +205,7 @@ En este modo, el sistema no debe presentar ninguna información de apoyo al usua
 \subsection{Ayudas al usuario}
 \label{course:ayudas}
 
-Según se ha citado en la sección \ref{art:learning}, \emph{David Olson} \cite{olson2014jerome} sugiere crear unos andamios que faciliten el aprendizaje, ofreciendo ayuda al usuario para que sean independientes en el futuro. En el \ac{Courseware}, el usuario puede solicitar ayuda mientras realiza la sesión guiada del procedimiento. Esta ayuda depende en gran medida de la tarea concreta que se esté realizando en ese momento. Cada tarea tiene asociado una ayuda concreta debido a que las tareas del procedimiento pueden ser muy diferentes entre sí. Si la ayuda que requiere el usuario es conceptual, el sistema mostrará un vídeo que contenga una explicación de la tarea a realizar, o puede ser simplemente que muestre un mensaje en el panel de información. Otro ejemplo es la consecución de una posición correcta de los instrumentos médicos. En este caso, el simulador añade información visual que se superpondrá en la vista de paciente, o pueden ser ayudas específicas que se mostrarán en la interfaz del \ac{Courseware}. Por último, en cuanto a la interpretación de la imagen de \ac{US}, el usuario puede solicitar ayuda y el sistema mostrará información superpuesta en la imagen. A continuación se detallan de forma pormenorizada.
+Según se ha citado en la sección \ref{art:learning}, \emph{David Olson} \cite{olson2014jerome} sugiere crear unos andamios que faciliten el aprendizaje, ofreciendo ayuda al usuario para que sean independientes en el futuro. En el \ac{Courseware}, el usuario puede solicitar ayuda mientras realiza la sesión guiada del procedimiento. Esta ayuda dependerá en gran medida de la tarea concreta que se esté realizando en ese momento. Cada tarea tiene asociada una ayuda concreta debido a que las tareas del procedimiento pueden ser muy diferentes entre sí. Si la ayuda que requiere el usuario es conceptual, el sistema mostrará un vídeo que contenga una explicación de la tarea a realizar, o puede ser simplemente que muestre un mensaje en el panel de información. Otro ejemplo es la consecución de una posición correcta de los instrumentos médicos. En este caso, el simulador añade información visual que se superpondrá en la vista de paciente, o pueden ser ayudas específicas que se mostrarán en la interfaz del \ac{Courseware}. Por último, en cuanto a la interpretación de la imagen de \ac{US}, el usuario puede solicitar ayuda y el sistema mostrará información superpuesta en la imagen. A continuación se detallan de forma pormenorizada.
 
 
 \subsubsection{Vídeos y ayudas textuales}
@@ -262,11 +262,11 @@ En ocasiones, las ayudas son acerca de alcanzar alguna posición concreta fundam
 % \end{figure}
 
 
-Otro ejemplo es las recomendaciones de la rotación, orientación e inclinación de la sonda de \ac{US} para una correcta identificación de las estructuras anatómicas necesarias en el procedimiento. En el ejemplo visto anteriormente (ver fig. \ref{fig:guidedui}), el complemento se puede observar en la división E.
+Otro ejemplo, son las recomendaciones de la rotación, orientación e inclinación de la sonda de \ac{US} para una correcta identificación de las estructuras anatómicas necesarias en el procedimiento. En el ejemplo visto anteriormente (ver fig. \ref{fig:guidedui}), el complemento se puede observar en la división E.
 
 
 \subsubsection{Ayudas en las imágenes de ultrasonidos}
-Una de las mayores dificultades del procedimiento de \ac{RA} es identificar correctamente las estructuras anatómicas que son fundamentales para la localización del nervio. Si el usuario no está seguro de que estructuras ve en la imagen de \ac{US}, el sistema puede proporcionarle cierta ayuda coloreando las estructuras que debería identificar (ver fig. \ref{fig:labelus}), junto con un mensaje que clarifica estos colores. Esto ha sido posible gracias a que el módulo de simulación de \ac{US}, además de proporcionar la imagen simulada, viene acompañada de una imagen con todas las estructuras anatómicas etiquetadas, con lo cual es fácil corresponder las dos imágenes.
+Una de las mayores dificultades del procedimiento de \ac{RA} es identificar correctamente las estructuras anatómicas que son fundamentales para la localización del nervio. Si el usuario no está seguro de que estructuras ve en la imagen de \ac{US}, el sistema puede proporcionarle cierta ayuda coloreando las estructuras que debería identificar (ver fig. \ref{fig:labelus}), junto con un mensaje que clarifica estos colores. Esto ha sido posible gracias a que el módulo de simulación de \ac{US}, además de proporcionar la imagen simulada, viene acompañada de una imagen con todas las estructuras anatómicas etiquetadas, con lo cual resulta sencillo colorear aquellas estructuras importantes gracias a la correspondencia entre las dos imágenes.
 
  
 %  \begin{figure}[ht]
@@ -298,13 +298,13 @@ En la figura \ref{fig:doppler} se muestra la implementación de la funcionalidad
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{IMG/uscolor.PNG}
-    \caption{Demostración de la funcionalidad color Doppler.}
+    \caption{Demostración de la funcionalidad color Doppler. Se muestran coloreadas de color azul los vasos sanguíneos.}
     \label{fig:doppler}
 \end{figure}
  
 \subsubsection{Reconocimiento de voz}
 
-El procedimiento de \ac{RA} no es un procedimiento que se realice exclusivamente por un anestesista. Lo habitual es que haya un asistente que  realice tareas secundarias dirigidas por la persona que está realizando el procedimiento. Esto es debido a que, en la mayor parte del tiempo del procedimiento, el médico tiene las manos ocupadas por la sonda de ultrasonidos y la aguja. Ciertas tareas, como administrar el anestésico, es realizado por el auxiliar mientras el anestesista supervisa el procedimiento. Aunque el simulador está orientado a que sea utilizado por una única persona y que las tareas no son complejas, se ha desarrollado un reconocimiento de voz para ejecutar ciertas tareas que permitirán al usuario realizar el procedimiento sin tener que soltar los instrumentos en ningún momento. A continuación, se definen los comandos diseñados para esta funcionalidad:
+El procedimiento de \ac{RA} no es un procedimiento que se realice exclusivamente por un anestesista. Lo habitual es que haya un asistente que se encargue de las tareas secundarias dirigidas por la persona que está realizando el procedimiento. Esto es debido a que, en la mayor parte del tiempo del procedimiento, el médico tiene las manos ocupadas por la sonda de ultrasonidos y la aguja. Ciertas tareas, como administrar el anestésico, son realizadas por el auxiliar mientras el anestesista maneja los instrumentos. Aunque el simulador está orientado a que sea utilizado por una única persona y que las tareas no son complejas, se ha desarrollado un reconocimiento de voz para ejecutar ciertas tareas que permitirán al usuario realizar el procedimiento sin tener que soltar los instrumentos en ningún momento. A continuación, se definen los comandos diseñados para esta funcionalidad:
 
 \begin{enumerate}
     \item \emph{Aspirate}: antes de suministrar el anestésico, el médico debe comprobar si no se encuentra la punta de la aguja en un vaso sanguíneo. Para ello, retrae la inyección para comprobar que no haya sangre.
@@ -335,7 +335,7 @@ La confirmación de que el anestésico está en el lugar adecuado es fundamental
 %     \label{fig:spread}
 % \end{figure}
 
-Se ha propuesto una solución geométrica y heurística. Teniendo la imagen de \ac{US} segmentada y el tejido donde se encontraba la aguja, se le dio la responsabilidad al \ac{Courseware} de mostrar la difusión del fluido de forma geométrica únicamente en la imagen mostrada al usuario. En la figura \ref{fig:spread2} se puede observar como el anestésico es propagado virtualmente de forma esférica entre los tejidos donde fue insertado. Esta solución no es realista ya que no se deforma el tejido como si ocurre en la realidad, pero ha sido desarrollada únicamente para completar los pasos del procedimiento y permitir al usuario afianzar sus conocimientos cognitivos.
+Debido a que el modelo físico no tenía la suficiente resolución para crear efectos como el de difusión del analgésico, se ha propuesto una solución geométrica y heurística. Teniendo la imagen de \ac{US} segmentada y el tejido donde se encontraba la aguja, se le dio la responsabilidad al \ac{Courseware} de mostrar la difusión del fluido de forma geométrica únicamente en la imagen mostrada al usuario. En la figura \ref{fig:spread2} se puede observar como el anestésico es propagado virtualmente de forma esférica entre los tejidos donde fue insertado. Esta solución no es realista ya que no se deforma el tejido como si ocurre en la realidad, pero ha sido desarrollada únicamente para completar los pasos del procedimiento y permitir al usuario afianzar sus conocimientos cognitivos.
 
 \begin{figure}[ht]
     \centering
@@ -351,24 +351,24 @@ Se ha propuesto una solución geométrica y heurística. Teniendo la imagen de \
 \subsection{Evaluación formativa y sumativa}
 \label{course:feedback}
 
-En el capítulo \ref{art:learning}, en \cite{ericsson1993role} se destaca la importancia de proveer retroalimentación al estudiante con el objetivo de mejorar su aprendizaje. Por tanto, una de las funcionalidades importantes del simulador es ofrecer una plataforma de entrenamiento y autoevaluación. Una de las ventajas de los simuladores de \ac{RV}, es que permiten registrar métricas de rendimiento de manera objetiva sin necesidad de la presencia de un supervisor. De esta forma, el sistema es capaz de ofrecer una análisis riguroso de la sesión.
+En el capítulo \ref{art:learning}, en \cite{ericsson1993role} se destaca la importancia de proveer retroalimentación al estudiante con el objetivo de mejorar su aprendizaje. Por tanto, una de las funcionalidades importantes del simulador es ofrecer una plataforma de entrenamiento y autoevaluación. Una de las ventajas de los simuladores de \ac{RV}, es que permiten registrar métricas de rendimiento de manera objetiva sin necesidad de la presencia de un supervisor. De esta forma, el sistema es capaz de ofrecer un análisis riguroso de la sesión.
 
 En concreto, el  \ac{Courseware} está encargado de implementar la plataforma de entrenamiento de \ac{RASim}. Este módulo, se encarga de guiar al usuario durante la práctica del procedimiento y registrar la sesión. Durante el proceso, se recopila toda la información posible a través de la comunicación con los demás componentes del simulador. Esto posibilita mostrar retroalimentación formativa y sumativa al usuario. Las métricas que se registran por el \ac{Courseware} se pueden clasificar en los siguientes tipos:
 
 \begin{itemize}
-    \item Situaciones de potencial riesgo para el paciente: en general estas métricas están asociadas a realizar el procedimiento de manera incorrecta. Ejemplos como levantar la sonda de ultrasonidos mientras la aguja está en el interior del paciente, extracción de la aguja de forma precipitada o repetidas inserciones, orientaciones de los instrumentos incorrectas, falta de evidencia de estructuras anatómicas en la imagen de \ac{US}, u omisión de pasos. 
+    \item Situaciones de potencial riesgo para el paciente: en general estas métricas están asociadas a la realización del procedimiento de manera incorrecta. Ejemplos como levantar la sonda de ultrasonidos mientras la aguja está en el interior del paciente, la extracción de la aguja de forma precipitada o repetidas inserciones, las orientaciones de los instrumentos incorrectas, la falta de evidencia de estructuras anatómicas en la imagen de \ac{US}, u la omisión de pasos. 
     
     \item Tiempos: tiempo empleado por el usuario en completar tareas, pasos y la sesión completa. 
     
-    \item Número de repeticiones: se registra el número de intentos de un paso concreto, o las veces que el usuario pide ayuda. Cuantas veces el usuario a perdido la zona de interés o los instrumentos médicos hayan salido de su posición óptima.
+    \item Número de repeticiones: se registra el número de intentos de un paso concreto, o las veces que el usuario pide ayuda, así como las  veces que el usuario ha perdido la zona de interés o los instrumentos médicos han salido de su posición óptima.
 \end{itemize}
 
-En el documento \cite{ded4.4}, se describen de forma pormenorizados.
+En el documento \cite{ded4.4}, se describen de forma pormenorizadas.
 
-Durante las sesiones guiadas, el usuario sigue las instrucciones del simulador mientras le proporciona ayuda o mensajes de error según las métricas registradas, permitiendo al usuario mejorar su habilidad en el momento. Esto es conocido como retroalimentación formativa. En la figura \ref{fig:errorrun}, se puede observar un mensaje de error en la ventana \ac{Courseware}.
+Durante las sesiones guiadas, el usuario sigue las instrucciones del simulador mientras este le proporciona ayuda o mensajes de error según las métricas registradas, permitiendo al usuario mejorar su habilidad en el momento. Esto es conocido como retroalimentación formativa. En la figura \ref{fig:errorrun}, se puede observar un mensaje de error en la ventana \ac{Courseware}.
 
 
-En el caso del simulador \ac{RASim} al finalizar el entrenamiento, el \ac{Courseware} muestra una ventana con las métricas obtenidas por el usuario durante la sesión. Esta retroalimentación es conocida como sumativa. En la figura \ref{fig:resultui}, se puede observar un ejemplo de la ventana de resultados, donde se puede observar que las métricas se agrupan en bloques del procedimiento de \ac{RA}. Estas métricas se mostrarán de color verde si están dentro de un rango aceptable y en rojo si se han cometido errores o el valor ha sobrepasado un límite.
+En el caso del simulador \ac{RASim} al finalizar el entrenamiento, el \ac{Courseware} muestra una ventana con las métricas obtenidas por el usuario durante la sesión. Esta retroalimentación es conocida como sumativa. En la figura \ref{fig:resultui}, se muestra un ejemplo de la ventana de resultados, donde se puede observar que las métricas se agrupan en bloques del procedimiento de \ac{RA}. Estas métricas se mostrarán de color verde si están dentro de un rango aceptable y en rojo si se han cometido errores o el valor ha sobrepasado un límite.
 
 %La evaluación formativa es un proceso en el que se realimenta el aprendizaje que posibilita su regulación directamente por el estudiante.\todo{revisar} 
 % De esta manera, junto con su supervisor, se puede inferir donde es necesario mejorar o incidir en determinadas actividades en relación con los resultados obtenidos. Con este objetivo, el simulador ofrece sesiones que hacen que el usuario pueda reforzar sus conocimientos y 

@@ -1,4 +1,3 @@
-\clearpage
 \section{Algoritmo de posicionamiento de pacientes virtuales} 
 \label{posing:result}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,7 +13,7 @@ Entre estos modelos, se incluyen modelos comerciales, otros procedentes de imág
 y formas geométricas básicas, que representan modelos de diferentes procedencias. Esto permitirá probar la flexibilidad del algoritmo utilizando distintos tipo de pacientes virtuales.
 %Estos modelos procede representan una gran parte de la variabilidad a la que se pueda enfrentar el método propuesto. 
 %A continuación se enumeran los modelos utilizados:
-En la tabla ~\ref{tab:complex} se resume el tamaño de los modelos mostrados en la figura \ref{fig:models}, y la complejidad de las mallas volumétricas generados para cada uno. Es necesario destacar las dimensiones de los modelos anatómicos y las representaciones volumétricas en comparación con los tamaños habituales 
+En la tabla ~\ref{tab:complex} se resume el tamaño de los modelos mostrados en la figura \ref{fig:models}, y la complejidad de las mallas volumétricas generadas para cada uno. Es necesario destacar las dimensiones de los modelos anatómicos y las representaciones volumétricas en comparación con los tamaños habituales 
 %vistos en la sección de estado del arte 
 utilizados por las técnicas descritas en la sección \ref{art:animation}. 
 En ocasiones, estos modelos tienen una complejidad de un orden de magnitud superior a las utilizadas en la bibliografía citada.
@@ -24,7 +23,7 @@ En ocasiones, estos modelos tienen una complejidad de un orden de magnitud super
 
 \centering
 
-\caption{Complejidad de los modelos utilizados}
+\caption{Complejidad de los modelos utilizados.}
 \label{tab:complex}
 \begin{tabular}{|x{35mm}|x{20mm}|x{24mm}|x{20mm}|x{24mm}|}
 \cline{2-5}
@@ -115,7 +114,7 @@ Modelo de barra con cuatro huesos  &2 152     &4 268    &8 539 &39 419\\
 
 %ZM es Zygote Masculino, ZF es Zygote Femenino, A es Anatomium
 
-Con el objetivo de no necesitar un usuario con habilidades artísticas o conocimientos avanzados de anatomía, se han utilizado animaciones procedentes de la base de datos de \ac{MoCap} de la \emph{Carnegie Mellon University}~\cite{CMUMCD}. El computador utilizado para realizar todos los test de la presente tesis se compone de un procesador \emph{Intel\textregistered i7-4820K @ 3.7GHz}, tarjeta gráfica \emph{GeForce GTX 770} y 16GB de memoria \acs{RAM}.
+Con el objetivo de no necesitar un usuario con habilidades artísticas o conocimientos avanzados de anatomía, se han utilizado animaciones procedentes de la base de datos de \emph{\ac{MoCap}} de la \emph{Carnegie Mellon University}~\cite{CMUMCD}. El computador utilizado para realizar todos los test de la presente tesis se compone de un procesador \emph{Intel\textregistered i7-4820K @ 3.7GHz}, tarjeta gráfica \emph{GeForce GTX 770} y 16GB de memoria \acs{RAM}.
 \clearpage
 
 \subsection{Análisis previo}
@@ -130,15 +129,15 @@ Aunque el algoritmo se ha diseñado con el objetivo de ser lo más robusto posib
 %Por una parte, en 
 \begin{figure}[ht]
    \centering
-    \includegraphics[width=0.9\textwidth]{IMG/zygoteproblems.png}
-    \caption{Axila del modelo \emph{ZygoteBody}$^{TM}$ Masculino. Con círculos amarillos se observa colisiones entre diferentes tejidos. Los círculos rojos representan colisiones con el tejido de la piel.}
+    \includegraphics[width=0.85\textwidth]{IMG/zygoteproblems.png}
+    \caption{Axila del modelo \emph{ZygoteBody}$^{TM}$ Masculino. Con círculos amarillos se observan colisiones entre diferentes tejidos. Los círculos rojos representan colisiones con el tejido de la piel.}
    \label{fig:zygoteproblems}
 \end{figure}
-Por ejemplo, ambos modelos de \emph{ZygoteBody}$^{TM}$ presentan auto-colisiones y se puede encontrar multitud de colisiones entre distintos tejidos. Además, zonas anatómicas muy próximas (p. ej. la axila) pueden resultar conflictivas como se puede observar en la figura \ref{fig:zygoteproblems}. Si bien la técnica propuesta no resuelve las colisiones y auto-colisiones de los tejidos internos, si que es capaz de generar poses que mantengan la posición relativa de los tejidos, siempre y cuando estos se encuentren en el interior del modelo. Por otra parte, las colisiones de la piel con otros órganos y, especialmente sus auto-colisiones, dificultan el correcto funcionamiento del algoritmo de animación. Las auto-colisiones de la piel provocan que zonas del modelo que deberían estar desconectadas queden unidas (ver fig. \ref{fig:volsol}). En estas situaciones la influencia de los huesos no puede calcularse de forma adecuada. En aras de hacer el algoritmo más robusto, se ha modificado la etapa de \emph{volumetrización} (ver sec. \ref{posing:volumetrizacion}). A la hora de calcular la imagen volumétrica a partir de la cual se calcula la malla de tetraedros, se eliminan los píxeles etiquetados como piel.
+Por ejemplo, ambos modelos de \emph{ZygoteBody}$^{TM}$ presentan auto-colisiones y se pueden encontrar multitud de colisiones entre distintos tejidos. Además, zonas anatómicas muy próximas (p. ej. la axila) pueden resultar conflictivas, como se puede observar en la figura \ref{fig:zygoteproblems}. Si bien la técnica propuesta no resuelve las colisiones y auto-colisiones de los tejidos internos, si que es capaz de generar poses que mantengan la posición relativa de los tejidos, siempre y cuando estos se encuentren en el interior del modelo. Por otra parte, las colisiones de la piel con otros órganos y, especialmente sus auto-colisiones, dificultan el correcto funcionamiento del algoritmo de animación. Las auto-colisiones de la piel provocan que zonas del modelo que deberían estar desconectadas queden unidas (ver fig. \ref{fig:volsol}). En estas situaciones la influencia de los huesos no puede calcularse de forma adecuada. En aras de hacer el algoritmo más robusto, se ha modificado la etapa de \emph{volumetrización} (ver sec. \ref{posing:volumetrizacion}). A la hora de calcular la imagen volumétrica, a partir de la cual se calcula la malla de tetraedros, se eliminan los píxeles etiquetados como piel.
 
 \begin{figure}[ht]
   \centering
-    \includegraphics[width=0.9\textwidth]{IMG/volumetrizacion4.png}
+    \includegraphics[width=0.85\textwidth]{IMG/volumetrizacion4.png}
     \caption{
     \emph{Voxelización} con el etiquetado de los \emph{vóxeles} de la piel (a) y la malla de tetraedros generada (b) conectando zonas próximas. \emph{Voxelización} sin etiquetar los \emph{vóxeles} de la piel (c) y la malla de tetraedros (d) resultante.
     \label{fig:volsol}
@@ -154,7 +153,7 @@ Por ejemplo, ambos modelos de \emph{ZygoteBody}$^{TM}$ presentan auto-colisiones
 
 
 
-En la figura \ref{fig:volsol} se puede observar la diferencia en la malla volumétrica con y sin la solución planteada. En la imagen \ref{fig:volsol}.a, se muestra la  \emph{voxelización} de la axila con \emph{vóxeles} de la piel etiquetados, lo que se traduce en una generación de tetraedros que conectan el brazo con el pecho como se puede ver en la imagen \ref{fig:volsol}.b. En la imagen \ref{fig:volsol}.c  se puede observar la \emph{voxelización} dejando la piel sin etiquetar y, por tanto, en la figura \ref{fig:volsol}.d la zona de la axila está correctamente separada.
+En la figura \ref{fig:volsol} se puede observar la diferencia en la malla volumétrica con y sin la solución planteada. En la imagen \ref{fig:volsol}a, se muestra la  \emph{voxelización} de la axila con \emph{vóxeles} de la piel etiquetados, lo que se traduce en una generación de tetraedros que conectan el brazo con el pecho, como se puede ver en la imagen \ref{fig:volsol}b. En la imagen \ref{fig:volsol}c  se puede observar la \emph{voxelización} dejando la piel sin etiquetar y, por tanto, en la figura \ref{fig:volsol}d la zona de la axila está correctamente separada.
 %
 
 %
@@ -167,21 +166,21 @@ En la figura \ref{fig:volsol} se puede observar la diferencia en la malla volum�
 
 %Debido a la necesidad de que el algoritmo resulte robusto frente a los problemas citados, se ha procedido a añadir diferentes ajustes en el algoritmo propuesto en varias de sus etapas.
 
-Con esta modificación se resuelve problemas de interconexión entre zonas no conectadas, aunque podría generar que se pueda encontrar tejidos que no están dentro de la malla volumétrica. %Esta solución genera un problema  adicional al crear situaciones donde se puedan encontrar ciertos tejidos fuera de la piel. 
+Con esta modificación se resuelven problemas de interconexión entre zonas no conectadas, aunque podría generar situaciones donde se puedan encontrar tejidos que no están dentro de la malla volumétrica. %Esta solución genera un problema  adicional al crear situaciones donde se puedan encontrar ciertos tejidos fuera de la piel. 
 
 %Con esta modificación, 
 En el caso concreto del modelo \emph{ZygoteBody}$^{TM}$ Masculino, alrededor de un 4.6\% de los vértices del modelo se sitúan fuera de la malla volumétrica. 
 Este incremento no afecta de manera significativa el proceso de \emph{mapeado} y se detallará en la sección  \ref{sec:rendimiento}.
 
-Otra limitación de los modelos de entrada, es que generalmente no se dispone de imágenes médicas del paciente completo. Esto es debido a que muchos de los procedimientos médicos se realizan solo en áreas localizadas.
+Otra limitación de los modelos de entrada, es que generalmente no se dispone de imágenes médicas del paciente completo debido a que muchos de los procedimientos médicos se realizan solo en áreas localizadas.
 %muchas de las imágenes médicas disponibles no representan completamente el modelo anatómico del paciente. ç
-El algoritmo propuesto es capaz de tratar con información incompleta como podemos observar en la figura \ref{fig:patient} donde se muestra un modelo construido a partir de imágenes médicas reales. Este modelo fue creado con la suite \ac{ITGVPH} del proyecto \ac{RASimAs}.
+El algoritmo propuesto es capaz de tratar con información incompleta, como se puede observar en la figura \ref{fig:patient} donde se muestra un modelo construido a partir de imágenes médicas reales. Este modelo fue creado con la suite \ac{ITGVPH} del proyecto \ac{RASimAs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[ht]
    \centering
     \includegraphics[width=0.9\textwidth]{IMG/patient.png}
-    \caption{La fila superior (a) se muestra el paciente virtual construido a partir de datos de paciente real en posición de reposo y la \emph{volumetrización} generada. En la zona inferior, se puede observar como la pierna ha sido re-posicionada utilizado el algoritmo propuesto en este trabajo.
+    \caption{En la fila superior (a) se muestra el paciente virtual construido a partir de datos de un paciente real en posición de reposo y la \emph{volumetrización} generada. En la zona inferior, se puede observar como la pierna ha sido re-posicionada utilizando el algoritmo propuesto en este trabajo.
     }
    \label{fig:patient}
 \end{figure}
@@ -199,8 +198,8 @@ El algoritmo propuesto es capaz de tratar con información incompleta como podem
 A continuación, se van a analizar los resultados que produce el algoritmo utilizando los diferentes métodos de \emph{skinning} (\ac{COR}, \ac{LBS} y \ac{DQS}).
 %
 %La etapa de selección de poses del algoritmo incluye la fase de \emph{skinning} para los vértices de los tetraedros y la consecuente deformación que es transferida a los tejidos del modelo virtual. 
-Primero, para mostrar de manera simple las diferencias visuales que se generan a través de las tres técnicas anteriormente citadas, se va a utilizar un prisma rectangular con cuatro huesos virtuales en su interior. Este modelo  se utilizará por su simplicidad para mostrar los resultados de rotaciones y giros con la finalidad de visualizar de forma directa las diferencias entre las técnicas seleccionadas. En la figura \ref{fig:bar_bending} se pueden observar las diferencias visuales del método seleccionado \ac{COR} frente a los dos métodos \ac{LBS} y \ac{DQS}. En cuanto a las rotaciones, se puede apreciar que en el caso de \ac{LBS} la articulación se colapsa (llamado normalmente \emph{collapsing elbows}). Sin embargo, en \ac{DQS} las articulaciones no se colapsan, pero se puede observar un abultamiento (este efecto se conoce como \emph{joint-bulging effect}). Respecto a los giros, es conocido que la técnica \ac{DQS} solventa el problema de \ac{LBS} donde la interpolación lineal de las matrices de transformación producen el efecto \emph{candy-wrapper}. Se puede observar que la técnica \ac{COR} solventa de forma adecuada los tres efectos (\emph{collapsing elbows}, \emph{joint-bulging effect} y \emph{candy-wrapper}). 
-En esta figura, se muestra el resultado sobre la malla de tetraedros. Estos se colorean según el peso de sus vértices, mostrando las diferentes influencias de los huesos virtuales. Se ha usado un código de colores, donde el color azul muestra donde los huesos impares alcanzan mayor influencia y el color rojo es donde los huesos pares alcanzan su mayor influencia. %Con este código de colores se puede observar las transiciones entre huesos de color verde.
+Primero, para mostrar de manera simple las diferencias visuales que se generan a través de las tres técnicas anteriormente citadas, se va a utilizar un prisma rectangular con cuatro huesos virtuales en su interior. Este modelo  se utilizará por su simplicidad para mostrar los resultados de rotaciones y giros con la finalidad de visualizar de forma directa las diferencias entre las técnicas seleccionadas. En la figura \ref{fig:bar_bending} se pueden observar las diferencias visuales del método seleccionado \ac{COR} frente a los métodos \ac{LBS} y \ac{DQS}. En cuanto a las rotaciones, se puede apreciar que en el caso de \ac{LBS} la articulación se colapsa (llamado normalmente \emph{collapsing elbows}). Sin embargo, en \ac{DQS} las articulaciones no se colapsan, pero se puede observar un abultamiento (este efecto se conoce como \emph{joint-bulging effect}). Respecto a los giros, es conocido que la técnica \ac{DQS} solvente el problema de \ac{LBS} donde la interpolación lineal de las matrices de transformación produce el efecto \emph{candy-wrapper}. Se puede observar que la técnica \ac{COR} solventa de forma adecuada los tres efectos (\emph{collapsing elbows}, \emph{joint-bulging effect} y \emph{candy-wrapper}). 
+En esta figura (fig. \ref{fig:bar_bending}), se muestra el resultado sobre la malla de tetraedros. Estos se colorean según el peso de sus vértices, mostrando las diferentes influencias de los huesos virtuales. Se ha usado un código de colores: el color azul muestra donde los huesos impares alcanzan mayor influencia y el color rojo es donde los huesos pares alcanzan su mayor influencia. %Con este código de colores se puede observar las transiciones entre huesos de color verde.
 Las transiciones entre áreas de influencia de dos huesos se pintan en verde.
 
 \begin{figure*}[ht]%[b]%[b!ht]
@@ -214,7 +213,7 @@ Las transiciones entre áreas de influencia de dos huesos se pintan en verde.
 El objetivo de la utilización de esta forma geométrica sencilla es mostrar de forma clara las diferencias que se obtienen de las distintas técnicas de \emph{skinning}. %A continuación, se mostrarán los resultados obtenidos al utilizar estas mismas técnicas utilizando los modelos anatómicos. 
 En las siguientes figuras, se utilizarán diferentes posturas de los modelos anatómicos para mostrar las diferencias en los resultados que producen cada uno de los métodos al deformar el paciente virtual.
 
-En la figura \ref{fig:thigh_bending} se muestra una rotación de la articulación de la pierna. Las zonas susceptible de mostrar defectos son la zona superior del muslo en la zona inguinal y el glúteo. En esta imagen se puede observar que tanto la zona inguinal y el glúteo con la técnica \ac{LBS} produce el efecto \emph{collapsing elbows}. En el caso de utilizar \ac{DQS}, se aprecia el defecto \emph{joint-bulging effect} común de esta técnica. Sin embargo, la técnica \ac{COR} ofrece un compromiso entre ambas técnicas. La imagen se acompaña con el tejido muscular en reposo como referencia y la deformación de los tejidos circulatorio y nervioso como ejemplo de tejidos internos del modelo. En esta última imagen, no se han incluido sus diferentes deformaciones ya que las diferencias visuales entre técnicas de estos dos tejidos es mínima al ser estructuras filiformes. En la figura \ref{fig:axila} se muestra otra deformación del modelo \emph{ZygoteBody}$^{TM}$ Masculino. En este caso, en la axila, la técnica \ac{DQS} genera un abultamiento donde las técnicas \ac{LBS} y \ac{COR} no producen efectos no deseados.
+En la figura \ref{fig:thigh_bending} se muestra una rotación de la articulación de la pierna. Las zonas susceptibles de mostrar defectos son la zona superior del muslo en la zona inguinal y el glúteo. En esta imagen se puede observar que tanto en la zona inguinal como en el glúteo con la técnica \ac{LBS} se produce el efecto \emph{collapsing elbows}. En el caso de utilizar \ac{DQS}, se aprecia el defecto \emph{joint-bulging effect} común de esta técnica. Sin embargo, la técnica \ac{COR} ofrece un compromiso entre ambas. La imagen se acompaña con el tejido muscular en reposo como referencia y la deformación de los tejidos circulatorio y nervioso, como ejemplo de tejidos internos del modelo. En esta última imagen, no se han incluido sus diferentes deformaciones ya que las diferencias visuales entre técnicas de estos dos tejidos es mínima al ser estructuras filiformes. En la figura \ref{fig:axila} se muestra otra deformación del modelo \emph{ZygoteBody}$^{TM}$ Masculino. En este caso, en la axila, la técnica \ac{DQS} genera un abultamiento donde las técnicas \ac{LBS} y \ac{COR} no producen efectos no deseados.
 
 
 
@@ -222,7 +221,7 @@ En la figura \ref{fig:thigh_bending} se muestra una rotación de la articulació
 \begin{figure*}[ht]%[b]%[b!ht]
   \centering
   \includegraphics[width=\textwidth]{IMG/compculo}
-    \caption{ Rotación de la pierna izquierda. En la primera imagen se encuentra la posición de reposo. A continuación, de izquierda a derecha se muestran la pierna rotada usando las 3 técnicas de \emph{skinning} (en \acs{LBS}, la articulación colapsa tanto en el glúteo como en la zona inguinal, \acs{DQS} produce un abultamiento en el glúteo y \acs{COR} suaviza esos defectos). A la derecha, se oculta los músculos para mostrar el tejido nervioso y circulatorio con la misma deformación producida por \acs{COR}.}
+    \caption{ Rotación de la pierna izquierda. En la primera imagen se encuentra la posición de reposo. A continuación, de izquierda a derecha se muestran la pierna rotada usando las 3 técnicas de \emph{skinning} (en \acs{LBS}, la articulación colapsa tanto en el glúteo como en la zona inguinal, \acs{DQS} produce un abultamiento en el glúteo y \acs{COR} suaviza esos defectos). A la derecha, se ocultan los músculos para mostrar el tejido nervioso y circulatorio con la misma deformación producida por \acs{COR}.}
     \label{fig:thigh_bending}
 \end{figure*}
 
@@ -248,7 +247,7 @@ En la figura \ref{fig:thigh_bending} se muestra una rotación de la articulació
     \label{fig:humanvisible}
 \end{figure}
 
-Con la intención de seguir mostrando las capacidades del algoritmo propuesto, se presentan más ejemplos de deformaciones realizadas para esta tesis. En la figura \ref{fig:humanvisible} se puede observar tanto el modelo superficial como el volumétrico de los datos del modelo \emph{Segmented Inner Organs}(\cite{VM2002},~\cite{VoxelMan}). Este caso demuestra la flexibilidad del algoritmo propuesto al tratar con datos incompletos, y la posibilidad de poder tratar tanto mallas superficiales y representaciones volumétricas.
+Con la intención de seguir mostrando las capacidades del algoritmo propuesto, se presentan más ejemplos de deformaciones realizadas para esta tesis. En la figura \ref{fig:humanvisible}, se puede observar tanto el modelo superficial como el volumétrico de los datos del modelo \emph{Segmented Inner Organs}(\cite{VM2002},~\cite{VoxelMan}). Este caso demuestra la flexibilidad del algoritmo propuesto al tratar con datos incompletos, y la posibilidad de poder tratar tanto con mallas superficiales como con representaciones volumétricas.
 %
 Finalmente, en la imagen \ref{fig:run1} se muestran resultados adicionales del uso del algoritmo con la técnica de \emph{skinning} \ac{COR} en los modelos \emph{ZygoteBody}$^{TM}$ Masculino y Femenino en diferentes situaciones.
 
@@ -268,7 +267,7 @@ Finalmente, en la imagen \ref{fig:run1} se muestran resultados adicionales del u
 %%%%%%%%%
 Las deformaciones resultantes de la etapa anterior dan como resultado poses visualmente plausibles en la mayoría de los casos. 
 %Aun así, se ha incluido la fase de optimización que permita al usuario deformar el paciente virtual con una técnica basada en físicas aunque no se dispongan de las descripciones mecánicas. A continuación, se mostraran la comparación de los resultados obtenidos y una evaluación para conocer si el usuario prefiere esta fase adicional frente a la solución geométrica.
-La fase de \emph{skinning} basada en \ac{COR} solventa de forma efectiva los problemas típicos de las técnicas basadas en \ac{LBS} y de \ac{DQS}. Aún así, en algunas circunstancias se ha detectado comportamientos no deseados que se aprecian visualmente como un aumento o disminución de volumen. 
+La fase de \emph{skinning} basada en \ac{COR} solventa de forma efectiva los problemas típicos de las técnicas basadas en \ac{LBS} y de \ac{DQS}. Aún así, en algunas circunstancias se han detectado comportamientos no deseados que se aprecian visualmente como un aumento o disminución de volumen. 
 La técnica \ac{COR} no puede asegurar la conservación de volumen tal y como lo hacen las técnicas basadas en física. %debido a que no se tiene en cuenta. 
 En el algoritmo propuesto, se ofrece la posibilidad de ejecutar una etapa adicional no interactiva para refinar los resultados obtenidos.
 Debido a que no se puede asegurar una apropiada descripción mecánica de los tejidos, el objetivo de esta optimización es garantizar la conservación del volumen utilizando la formulación co-rotacional del \acs{FEM} (ver sec. \ref{posing:optimizacion}).
@@ -300,16 +299,16 @@ Para comprobar si los usuarios son capaces de distinguir entre técnicas, se ha 
 
 En esta encuesta, se ha pedido a los participantes que valoren el realismo de varias imágenes estáticas basándose en una escala de tipo \emph{Likert} comprendida entre los valores 1 y 8. Primero, se mostraba una imagen con el paciente virtual en reposo
 %la imagen de referencia para cada deformación 
-y, a continuación, se presentaba dos  imágenes. Estas imágenes correspondían a una deformación obtenida por ambas técnicas: la optimización \ac{FEM} y el resultado de la técnica \ac{COR}. Se mostraban posiciones diferentes, utilizando los modelos junto con sus tejidos internos: \emph{ZygoteBody}$^{TM}$ Masculino y Femenino; Anatomium; y el modelo extraído de paciente real. Para reducir el sesgo de orden, las imágenes se mezclaban de manera aleatoria.
+y, a continuación, se presentaban dos  imágenes. Estas imágenes correspondían a una deformación obtenida por ambas técnicas: la optimización \ac{FEM} y el resultado de la técnica \ac{COR}. Se mostraban posiciones diferentes, utilizando los modelos junto con sus tejidos internos: \emph{ZygoteBody}$^{TM}$ Masculino y Femenino; Anatomium; y el modelo extraído de paciente real. Para reducir el sesgo de orden, las imágenes se mezclaban de manera aleatoria.
 
 
-Un total de 16 sujetos han participado, de los cuales 2 eran mujeres y 14 eran hombres;
+Un total de dieciséis sujetos han participado, de los cuales dos eran mujeres y catorce eran hombres;
 %\todo{Metemos la gráfica de la otra encuesta? quito la primera encuesta de los anexos?}. 
-con una edad comprendida entre los 20 y los 52; donde 13 de ellos se han identificado como profesionales de informática gráfica.
+con una edad comprendida entre los 20 y los 52; donde trece de ellos se han identificado como profesionales de informática gráfica.
 
 
 En primer lugar, se ha comprobado si las respuestas representaban una distribución normal. Al resultar negativo, se han comparado los resultados obtenidos utilizando la prueba de los rangos con signo de Wilcoxon no paramétrica para comparar el rango medio de dos muestras relacionadas y determinar si existen diferencias entre ellas. Con el resultado obtenido (\emph{p-value} $> 0.9$ intervalo de confianza) no se puede confirmar que los usuarios encuentren diferencias significativas entre ambos modelos. 
-En la figura \ref{fig:stat} se muestran los resultados de la encuesta en una representación con dos diagramas de cajas y bigotes. En el diagrama (a), se han agrupado las respuestas de cada una de las técnicas. Por otra parte, en el diagrama (b), se muestran las respuestas separadas por poses de las distintas técnicas utilizadas. Como se puede observar, las valoraciones de ambas técnicas son similares, con lo que se puede concluir que los usuarios no encuentren diferencias significativas entre ambas.  
+En la figura \ref{fig:stat} se muestran los resultados de la encuesta en una representación con dos diagramas de cajas y bigotes. En el diagrama (a), se han agrupado las respuestas de cada una de las técnicas. Por otra parte, en el diagrama (b), se muestran las respuestas separadas por poses de las distintas técnicas utilizadas. Como se puede observar, las valoraciones de ambas técnicas son similares, con lo que se puede concluir que los usuarios no encuentran diferencias significativas entre ambas.  
 %
 
 %
@@ -333,7 +332,7 @@ pudiendo cargar el paciente virtual tantas veces como se necesite sin volver a g
 
 
 Como se ha citado en la sección \ref{sec:ana_prev}, la modificación para quitar los \emph{vóxeles} de la piel en la \emph{voxelización} (ver sec. \ref{posing:volumetrizacion}) produce vértices huérfanos que se encuentran fuera de la malla de tetraedros.
-Debido a este problema, se propuso una modificación adicional de la etapa mapeado (ver sección \ref{posing:Mapeado}) para resolverlo. Aprovechando la estructura espacial que proporciona la \ac{tabla hash}, aunque el vértice no esté dentro de ningún tetraedro, es fácil buscar el tetraedro más cercano recursivamente en la \ac{tabla hash}. 
+Debido a este problema, se propuso una modificación adicional de la etapa de mapeado (ver sección \ref{posing:Mapeado}). Aprovechando la estructura espacial que proporciona la \ac{tabla hash}, aunque el vértice no esté dentro de ningún tetraedro, es fácil buscar el tetraedro más cercano recursivamente en la \ac{tabla hash}. 
 En este caso, el tiempo de mapeado es 36,35 segundos utilizando la \ac{tabla hash} como método de búsqueda. Este tiempo es muy pequeño si se compara con el tiempo que tardaría  la técnica de fuerza bruta, que sería de 4 horas y 55 minutos para relacionar 1 277 325 de vértices a 2 584 115 de tetraedros. % en el caso del mismo ejemplo. 
 
 \begin{table*}[ht]
@@ -362,16 +361,16 @@ S. circulatorio  &380 302     &4.29    &11 541* &5 008 874\\
 \end{tabular}
 \begin{tablenotes}
       \small
-      \item * La creación de la \ac{tabla hash} esta incluida en cada medición (4 834 ms). El tiempo total no puede ser calculado directamente sumando todos los valores de la columna.
+      \item * La creación de la \ac{tabla hash} está incluida en cada medición (4 834 ms). El tiempo total no puede ser calculado directamente sumando todos los valores de la columna.
 \end{tablenotes}
 \end{threeparttable}
 \end{table*}
 
-En la tabla \ref{tab:bruteforce} se muestra una comparación entre los tiempos empleados por el algoritmo de fuerza bruta y el método \emph{Spatial Hashing} en mapear los distintos tejidos del \emph{ZygoteBody}$^{TM}$ Masculino con su malla volumétrica. Como se puede observar, un gran porcentaje de los vértices de la piel se encuentran fuera de la malla de tetraedros. Este resultado es lógico al eliminar los \emph{vóxeles} que pertenecían a la piel. Sin embargo, los demás vértices huérfanos corresponden a la problemática ya citada del modelo anatómico. Esto solo hace reafirmar la robustez del algoritmo propuesto antes fallos del modelo de entrada. La complejidad de la malla de tetraedros se puede consultar en la tabla \ref{tab:complex}. 
+En la tabla \ref{tab:bruteforce} se muestra una comparación entre los tiempos empleados por el algoritmo de fuerza bruta y el método \emph{Spatial Hashing} en mapear los distintos tejidos del \emph{ZygoteBody}$^{TM}$ Masculino con su malla volumétrica. Como se puede observar, un gran porcentaje de los vértices de la piel se encuentran fuera de la malla de tetraedros. Este resultado es lógico al eliminar los \emph{vóxeles} que pertenecían a la piel. Sin embargo, los demás vértices huérfanos corresponden a la problemática ya citada del modelo anatómico. Esto solo hace reafirmar la robustez del algoritmo propuesto ante fallos del modelo de entrada. La complejidad de la malla de tetraedros se puede consultar en la tabla \ref{tab:complex}. 
 
 
 
-Para finalizar de analizar el preproceso del algoritmo, a continuación, se muestra la tabla \ref{tab:pre_pro} dónde se pueden consultar los tiempos empleados de cada etapa utilizando los tres modelos más complejos de los que se disponía. Se obtienen resultados similares, los cuales se sitúan en torno a los siete minutos.
+Para finalizar de analizar el preproceso del algoritmo, a continuación, se muestra la tabla \ref{tab:pre_pro} dónde se pueden consultar los tiempos empleados en cada etapa utilizando los tres modelos más complejos de los que se disponía. Se obtienen resultados similares, los cuales se sitúan en torno a los siete minutos.
 
 %\todo{meter todos los valores significativos de configuración}
 
@@ -380,10 +379,11 @@ Para finalizar de analizar el preproceso del algoritmo, a continuación, se mues
 
 
 
-
 \begin{table*}[ht]
+\begin{threeparttable}
 \centering
-\caption{Tiempo (en milisegundos) utilizado por cada etapa. *\acs{COR} es la etapa de calcular los centros de rotación (sec. \ref{posing:Poses}).}
+\caption{Tiempo (en milisegundos) utilizado por cada etapa. }
+\label{tab:pre_pro}
 \begin{tabular}{|x{30mm}|c|c|c|c|c|}
 \hline
 \textbf{Modelo} & \textbf{Rigging} & \textbf{Volumetrización} & \textbf{Pesado} & \textbf{Mapeado} & \textbf{COR }  \\ 
@@ -395,7 +395,11 @@ Para finalizar de analizar el preproceso del algoritmo, a continuación, se mues
 Anatomium   & 31 891 & 120 465 & 23 318 & 44 521  & 115 214\\ 
 \hline
 \end{tabular}
-\label{tab:pre_pro}
+\begin{tablenotes}
+      \small
+      \item *\acs{COR} es la etapa de calcular los centros de rotación (sec. \ref{posing:Poses}).
+\end{tablenotes}
+\end{threeparttable}
 \end{table*}
 
 

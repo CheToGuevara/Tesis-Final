@@ -14,14 +14,14 @@ La responsabilidad del primer prototipo de \ac{RASim} recae en el equipo de trab
 
 %Por ello el usuario, normalmente estudiante de anestesiología, se sentará delante del entorno de trabajo y se identificará en el sistema para poder almacenar y seguir su evolución durante todo el proceso. En las primeras sesiones, el usuario podrá revisar contenido multimedia para familiarizarse con el simulador y el procedimiento médico. El siguiente paso, será realizar una sesión guiada \del{en la cual} que  consiste en que el simulador va orientando al usuario en todos los pasos que debe realizar para completar con éxito el procedimiento médico. Durante el proceso, el usuario recibirá retroalimentación formativa por los errores o aciertos cometidos. Al finalizar la sesión, el simulador mostrará una retroalimentación sumativa sobre el desempeño del usuario y métricas recogidas por el simulador. Cada estudiante tiene designado un tiempo y objetivos mínimos que deberá cumplir antes de continuar con el entrenamiento. Una vez completada la primera sesión guiada, el usuario podrá repetir la sesión guiada o realizar una sesión libre, en la que el simulador no proporcionará ninguna indicación y sólo se recogerán métricas de la sesión. Todas las evaluaciones y métrica serán enviadas a un servidor dónde el supervisor podrá consultar y revisar la evolución de los usuarios.
 
-El simulador consta de una mesa de trabajo donde se situarán todos los periféricos con los que interaccionará el usuario. En esta mesa se encontrarán dos monitores para mostrar la escena virtual y la imagen de \ac{US}, junto con los dispositivos que simulan una sonda de ultrasonidos (\ac{tracker}) y una aguja (dispositivo háptico). En cuanto al software, en la figura \ref{fig:coursearq} se puede observar la arquitectura software propuesta para el simulador: 
+El simulador consta de una mesa de trabajo donde se situarán todos los periféricos con los que interaccionará el usuario. En la mesa se encontrarán dos monitores para mostrar la escena virtual y la imagen de \ac{US}, junto con los dispositivos que simulan una sonda de ultrasonidos (\emph{\acs{tracker}}) y una aguja (dispositivo háptico). En cuanto al software, en la figura \ref{fig:coursearq} se puede observar la arquitectura software propuesta para el simulador: 
 \begin{itemize}
 
     \item Módulo US: se encarga de simular el proceso de generación de la imagen \ac{US}.
-    \item \acs{SOFA}: módulo encargado de la simulación física.
-    \item \emph{H3D}: un módulo de visualización de la escena virtual y comunicación con los dispositivos.
+    \item \acs{SOFA}: es el módulo encargado de la simulación física.
+    \item \emph{H3D}: es un módulo de visualización de la escena virtual y comunicación con los dispositivos.
     \item \acs{Courseware}: es la plataforma de aprendizaje que se comunica con el módulo \emph{H3D}, \ac{US} y el servidor local .
-    \item Servidor local y global: módulo para almacenar y gestionar la información del simulador.
+    \item Servidor local y global: es un módulo para almacenar y gestionar la información del simulador.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -60,10 +60,10 @@ A continuación se describirán brevemente los distintos componentes del simulad
 
 \subsubsection{Mesa de trabajo}
 
-El principal objetivo de crear una mesa de trabajo del simulador es estandarizar la posición relativa de los dispositivos anteriormente citados. %Además de suplir las carencias de estos para mejorar la inmersión del usuario en el simulador.
-Se ha diseñado una plataforma en forma de \emph{"T"} para poder incorporar de manera perpendicular el campo de trabajo del dispositivo magnético por una parte y el dispositivo háptico por otra. De esta manera, el dispositivo háptico puede ser intercambiado de posición para permitir que el simulador pueda ser configurado para que se pueda realizar con ambas manos. Situado en el centro, se colocará un maniquí de un material deformable para simular la zona anatómica del paciente. 
+El principal objetivo de crear una mesa de trabajo es estandarizar la posición relativa de los dispositivos anteriormente citados. %Además de suplir las carencias de estos para mejorar la inmersión del usuario en el simulador.
+Se ha diseñado una plataforma en forma de "T" para poder incorporar de manera perpendicular el campo de trabajo del dispositivo magnético por una parte y el dispositivo háptico por otra. De esta manera, el dispositivo háptico puede ser intercambiado de posición para permitir que el simulador pueda ser configurado para que se pueda realizar con ambas manos. Situado en el centro, se colocará un maniquí de un material deformable para simular la zona anatómica del paciente. 
 
-Junto con la plataforma, se encuentran los monitores situados de manera frontal. Esto hace que el usuario tenga todos los elementos en su rango de visión y evite realizar una rotación de cuello. En el primero, se muestra la vista del paciente. Esta consiste en la \emph{renderización} de la escena virtual dónde se encuentra el modelo anatómico de un paciente y una representación virtual de los instrumentos médicos. Además, esta vista se puede utilizar para añadir elementos virtuales que mejoren la efectividad del entrenamiento. 
+Junto con la plataforma, se encuentran los monitores situados de manera frontal. Esto hace que el usuario tenga todos los elementos en su rango de visión y evite realizar una rotación de cuello. En el primero, se muestra la vista del paciente que consiste en la \emph{renderización} de la escena virtual dónde se encuentra el modelo anatómico de un paciente y una representación virtual de los instrumentos médicos. Además, esta vista se puede utilizar para añadir elementos virtuales que mejoren la efectividad del entrenamiento. 
 Por otra parte, en el segundo monitor se muestra el software de entrenamiento en el que se incluye la imagen de \ac{US}. Una versión del prototipo se puede ver en la figura \ref{fig:simulator}.
 
 
@@ -76,7 +76,7 @@ Por otra parte, en el segundo monitor se muestra el software de entrenamiento en
 
 
 \subsubsection{Maniquí} 
-En el procedimiento de \ac{RA}, el radiólogo apoya la sonda de ultrasonidos y parte del brazo en la anatomía del paciente. Por tanto, era necesario simular cierta zona que ayudará al usuario a apoyar la sonda de ultrasonidos e introducir la aguja en algún lugar de manera segura y controlada. Esto requería que el material fuera resistente tanto a presión como a la inserción de la aguja repetidamente sin introducir fuerzas adicionales al sistema. Se diseñó un rectángulo de espuma de poliuretano que sirviera de recipiente para un relleno con espuma floral como se puede observar en la figura \ref{fig:simulator}.
+En el procedimiento de \ac{RA}, el radiólogo apoya la sonda de ultrasonidos y parte del brazo en la anatomía del paciente. Por tanto, es necesario reproducir la zona anatómica que ayudará al usuario a apoyar la sonda de ultrasonidos e introducir la aguja en algún lugar de manera segura y controlada. Esto requiere que el material sea resistente tanto a presión como a la inserción de la aguja repetidamente sin introducir fuerzas adicionales al sistema. Por tanto, se diseñó un rectángulo de espuma de poliuretano que sirviera de recipiente para un relleno con espuma floral como se puede observar en la figura \ref{fig:simulator}.
 
 % La idea original era obtener un reemplazo rápido porque la espuma floral, aunque permitía una inserción de la aguja sin apenas resistencia, era muy débil ante presión y rotaciones de la aguja. Además, las inserciones continuas debilitaban el material y pueden dar información a los usuarios que utilicen el simulador posteriormente.
 % Para añadir consistencia a la espuma floral se ideó añadir una capa de silicona por encima. Esta capa permitía que la espuma no se deshiciera con el rozamiento y además proporcionaba cierta estabilidad, pero a la vez introducía un pequeño rozamiento que habría que salvar al introducir una aguja. En la figura \ref{fig:silicona} se puede observar un prototipo.
@@ -128,7 +128,7 @@ En el procedimiento de \ac{RA}, el radiólogo apoya la sonda de ultrasonidos y p
 
 \subsubsection{Sonda de ultrasonidos}
 
-El posicionamiento de la sonda de ultrasonidos es clave en el procedimiento de \ac{RA}. La técnica eco-gráfica es fundamental para encontrar el nervio a anestesiar. Con el objetivo de simular este aparato médico, se ha diseñado un modelo impreso en 3D que imita una sonda real que envuelve al sensor del dispositivo de seguimiento. Para esta finalidad, se ha utilizado un \ac{tracker} magnético\footnote{Ascension 3D-Guidance trakSTAR, módelo 800 \cite{Ascension}.} como se puede observar en la figura \ref{fig:simulator}. 
+El posicionamiento de la sonda de ultrasonidos es clave en el procedimiento de \ac{RA}. La técnica eco-gráfica es fundamental para encontrar el nervio a anestesiar. Con el objetivo de simular este aparato médico, se ha diseñado un modelo impreso en 3D que imita una sonda real que envuelve al sensor del dispositivo de seguimiento. Para esta finalidad, se ha utilizado un \emph{\acs{tracker}} magnético\footnote{Ascension 3D-Guidance trakSTAR, módelo 800 \cite{Ascension}.} como se puede observar en la figura \ref{fig:simulator}. 
 %Este dispositivo es capaz de saber la posición de un receptor o sensor gracias a la generación de un campo magnético producido por un emisor. La deformación del campo magnético producido por el receptor ayuda al dispositivo a conocer su posición y orientación. Este sensor es el que se introduce dentro del modelo impreso y sirve para saber la posición de la sonda respecto a la mesa de trabajo. %De esta manera el usuario utiliza un instrumento parecido lo más posible a uno real.
 
 % \begin{figure}[ht]
@@ -163,9 +163,9 @@ En el procedimiento de \ac{RA} guiado por \ac{US}, el primer paso es la localiza
 
 %El medico utiliza el taco para saber donde esta la aguja. Siempre que se traviesan las fascias el lo siente.
 
-La inserción real de la aguja implica que su movimiento pueda definirse a través de 5 \ac{DOF}. La correcta posición, el movimiento adecuado y la sensación de la aguja es muy importante en el entrenamiento de los nuevos médicos. Por ello la selección del dispositivo con el que replicar estos comportamientos no es sencillo. Los \ac{tracker}s mágneticos anteriormente citados serían una buena solución debido a que son capaces de registrar el movimiento del sensor en sus 6 \ac{DOF}, pero estos dispositivos no están pensados para devolver fuerzas al usuario. Los dispositivos hápticos suelen resolver este tipo de problema al ser utilizados como dispositivos de seguimiento y a la vez son capaces de reproducir fuerzas e interaccionar con el usuario.
+La inserción real de la aguja implica que su movimiento pueda definirse a través de 5 \ac{DOF}. La correcta posición, el movimiento adecuado y la sensación de la aguja son muy importantes en el entrenamiento de los nuevos médicos. Por ello la selección del dispositivo con el que replicar estos comportamientos no es sencillo. Los \emph{\acs{tracker}s} magnéticos anteriormente citados serían una buena solución debido a que son capaces de registrar el movimiento del sensor en sus 6 \ac{DOF}, pero estos dispositivos no están pensados para devolver fuerzas al usuario. Los dispositivos hápticos suelen resolver este tipo de problemas al ser utilizados como dispositivos de seguimiento y a la vez son capaces de reproducir fuerzas e interaccionar con el usuario.
 
-Desde el proyecto \ac{RASimAs} se ha seleccionado el dispositivo \emph{Touch} de la empresa \emph{3D System}\cite{touch} (ver figura \ref{fig:simulator}). Aunque este dispositivo solo es capaz de proporcionar fuerzas en los 3 \ac{DOF} básicos (X,Y,Z), hay que alcanzar un compromiso entre versatilidad y el presupuesto. Existen dispositivos hápticos que pueden ofrecer la experiencia de simular la inserción de una aguja, pero su complejidad implicaría un coste inasequible para la comercialización de un simulador. %y aumentaría la dificultad de una inmersión del usuario debido a que no existe dispositivo háptico con esas características de pequeñas dimensiones. Sin embargo, el dispositivo \emph{Touch} proporciona la posibilidad de que el sistema sea más barato y consiga cierto realismo. 
+Desde el proyecto \ac{RASimAs} se ha seleccionado el dispositivo \emph{Touch} de la empresa \emph{3D System}\cite{touch} (ver figura \ref{fig:simulator}). Aunque este dispositivo solo sea capaz de proporcionar fuerzas en los 3 \ac{DOF} básicos (X,Y,Z), se ha de alcanzar un compromiso entre versatilidad y el presupuesto. Existen dispositivos hápticos que pueden ofrecer la experiencia de simular la inserción de una aguja, pero su complejidad implicaría un coste inasequible para la comercialización de un simulador. %y aumentaría la dificultad de una inmersión del usuario debido a que no existe dispositivo háptico con esas características de pequeñas dimensiones. Sin embargo, el dispositivo \emph{Touch} proporciona la posibilidad de que el sistema sea más barato y consiga cierto realismo. 
 %El usuario maneja este dispositivo a través de una especie de bolígrafo (\emph{stylus}) que es capaz de reconocer la posición, orientación y devolver fuerzas. Incluso es lo suficiente ligero para poder permitir su colocación en otras posiciones con el objetivo de permitir a los usuarios elegir con que mano utilizar los dispositivos.
 
 % Aun así, la utilización de este dispositivo para simular una aguja no esta exento de problemas. El objetivo es simular una aguja real pero el actuador del dispositivo es completamente diferente y sería muy difícil replicar el mismo comportamiento que se experimenta en una situación real.
@@ -201,7 +201,7 @@ Desde el proyecto \ac{RASimAs} se ha seleccionado el dispositivo \emph{Touch} de
 %Uno de los componentes principales de un simulador de \ac{RV} es el motor donde se producen todos los cálculos que permiten simular la escena virtual. 
 %En el contexto de \ac{RASim}, es lógico que este simulador tenga un núcleo que realiza las simulaciones físicas y cálculos necesarios con el objetivo de comunicarse con los dispositivos de entrada y salida. Además, también es necesario un núcleo de simulación que proporcione las imágenes de \ac{US} para conseguir mostrar una simulación realista que pueda ayudar al usuario. Por último, el sistema también deberá \emph{renderizar} la escena con la información de los dispositivos para ayudar al usuario a que alcance mayor inmersión de la escena. 
 
-Debido a que el proyecto \ac{RASimAs} participan multitud de instituciones, los módulos encargados de cada tarea han sido desarrollados independientemente por cada participante y se presentarán en las siguientes secciones.
+Debido a que en el proyecto \ac{RASimAs} participan multitud de instituciones, los módulos encargados de cada tarea han sido desarrollados independientemente por cada participante y se presentarán en las siguientes secciones.
 
 
 \subsubsection{Simulación visual}
@@ -209,19 +209,19 @@ Debido a que el proyecto \ac{RASimAs} participan multitud de instituciones, los 
 \emph{H3D} \cite{sensegraphics2012open} es una librería de código abierto (\ac{GPL})  orientada a la utilización de hápticos en entornos 3D desarrollada por la empresa \emph{Sensegraphics}. 
 
 El módulo \ac{Courseware} utiliza la librería \emph{H3D} como punto de comunicación entre el software y los dispositivos. De esta forma gestionará los demás componentes y dispositivos. A través de este software, también se recopilará la información de los dispositivos de entrada.
-En cuanto el simulador es iniciado, \emph{H3D} se encarga de cargar la escena seleccionada utilizando el formato \ac{X3D}, inicia el módulo de simulación física y activa los dispositivos:  el dispositivo háptico y el \ac{tracker}. La vista del paciente y la sala de operaciones es \emph{renderizada} por \emph{H3D} a través de su gestor de ventanas.
+En cuanto el simulador es iniciado, \emph{H3D} se encarga de cargar la escena seleccionada utilizando el formato \ac{X3D}, inicia el módulo de simulación física y activa los dispositivos:  el dispositivo háptico y el \emph{\acs{tracker}}. La vista del paciente y la sala de operaciones es \emph{renderizada} por \emph{H3D} a través de su gestor de ventanas.
 %Las simulaciones físicas y el cálculo de las deformaciones de los tejidos como consecuencia de la colisión de los instrumentos médicos serán calculadas en el siguiente componte del simulador.
 
 \subsubsection{Simulación física}
 
 En esta ocasión, es el software \emph{SOFA} \cite{sofaweb}, desarrollado por el grupo \ac{INRIA}, el encargado de realizar las simulaciones físicas. Esto permite simular la deformación de los tejidos al contacto de la sonda o la aguja, además de proporcionar la respuesta física a la aguja que será retransmitida al dispositivo háptico.
 
-La librería \emph{SOFA} es código abierto (bajo licencia \ac{LGPL}) y dispone de multitud de métodos y algoritmos matemáticos usados en simulación como distintos \emph{solvers}\footnote{Herramienta matemática para resolver sistemas de ecuaciones lineales.}, modelos físicos como \ac{FEM}, detección de colisiones, simulación de tejidos rígidos o flexibles.
+La librería \emph{SOFA} es código abierto (bajo licencia \ac{LGPL}) y dispone de multitud de métodos y algoritmos matemáticos usados en simulación como distintos \emph{solvers}\footnote{Herramienta matemática para resolver sistemas de ecuaciones lineales.}, modelos físicos como \ac{FEM} y detección de colisiones, simulación de tejidos rígidos o flexibles.
 
 En \ac{RASim}, \emph{SOFA} realiza las siguientes tareas:
 \begin{itemize}
     \item Deformación de la piel y otros tejidos producida por la interacción de los instrumentos médicos utilizando el método \ac{FEM} co-rotacional.
-    \item La interacción con la aguja a través de diferentes tipos de tejidos, simulando la penetración de la piel y las fascias, además de la fricción de los demás tejidos \cite{needleinsertion}.
+    \item La interacción con la aguja a través de diferentes tipos de tejidos, simulando la penetración en la piel y las fascias, además de la fricción de los demás tejidos \cite{needleinsertion}.
    %\item La contracción de los músculos con una respuesta física según sus propiedades mecánicas.
     
 \end{itemize}
@@ -232,8 +232,8 @@ En cuanto a la simulación de la imagen de ultrasonidos, se utiliza una librerí
 
 El módulo de ultrasonidos está desarrollado con un algoritmo basado en métodos acústicos geométricos \cite{Law2015}, el cual es clasificado como un enfoque \emph{generativo}. Pensando geométricamente, la onda de sonidos se puede aproximar a través de rayos que interaccionan con elementos de la escena, por consiguiente producen un reflejo del rayo refractado o dispersado. Estos rayos se definen por energía acústica, que puede ser absorbida o disipada durante la interacción con la escena. Esta energía es usada para calcular la intensidad de los ecos y en consecuencia la intensidad de los \emph{píxeles} que servirán para construir la imagen resultante.
 
-Para alcanzar tiempos interactivos en presentar las imágenes de ultrasonidos, la mayor parte de los intensos cálculos y operaciones pesadas son realizadas durante un proceso previo. Específicamente, en esta etapa se generan un campo acústico que defina las propiedades del haz de la sonda y el transductor, las texturas tridimensionales que serán usadas para simular la dispersión del rayo y, además, las estructuras de datos auxiliares que ayudarán a acelerar el proceso de simulación.
-Así, de esta manera, cuando el objetivo es tener una respuesta interactiva, sólo es necesario la posición y orientación de la sonda virtual que se usará para calcular el origen y la dirección de los rayos acústicos. Estos rayos serán muestreados a través de la escena, estimando la energía reflejada y la distancia recorrida a través de los tejidos. Por otra parte, el remanente de energía transmitida, las absorciones y reflexiones se tienen en cuenta para generar la imagen final.
+Para alcanzar tiempos interactivos en presentar las imágenes de ultrasonidos, la mayor parte de los intensos cálculos y operaciones pesadas son realizadas durante un proceso previo. Específicamente, en esta etapa se genera: un campo acústico que define las propiedades del haz de la sonda y el transductor, las texturas tridimensionales que serán usadas para simular la dispersión del rayo y, además, las estructuras de datos auxiliares que ayudarán a acelerar el proceso de simulación.
+De esta manera, cuando el objetivo sea tener una respuesta interactiva, sólo será necesaria la posición y orientación de la sonda virtual que se usará para calcular el origen y la dirección de los rayos acústicos. Estos rayos serán muestreados a través de la escena, estimando la energía reflejada y la distancia recorrida a través de los tejidos. Por otra parte, el remanente de energía transmitida, las absorciones y reflexiones se tienen en cuenta para generar la imagen final.
 
 
 
@@ -252,9 +252,9 @@ Así, de esta manera, cuando el objetivo es tener una respuesta interactiva, só
 
 \subsubsection{Servidor local y global}
 
-El proyecto \ac{RASimAs} contempla que se almacene toda aquella información generada en la realización del proyecto. En cuanto a la información relevante para el simulador \ac{RASim}, se guardarán las escenas y modelos anatómicos que se utilizarán en el simulador. También, se almacenará el material multimedia complementario necesario para la plataforma de entrenamiento. Además, esta base de datos servirá para guardar el perfil de los usuarios y las métricas que se recogerán para evaluarlos posteriormente.
+El proyecto \ac{RASimAs} contempla que se almacene toda aquella información generada en la realización del proyecto. En cuanto a la información relevante para el simulador \ac{RASim}, se guardarán las escenas y modelos anatómicos que se utilizarán en el simulador. También, se almacenará el material multimedia complementario que sea necesario para la plataforma de entrenamiento. Además, esta base de datos servirá para guardar el perfil de los usuarios y las métricas que se recogerán para evaluarlos posteriormente.
 
-Con el objetivo de no necesitar estar conectado a internet permanentemente, se ha diseñado un servidor local y otro global. El servidor local será instalado en el simulador de tal forma que periódicamente consulte nuevas actualizaciones o mande información al servidor global que comparten todos los simuladores.
+Con el objetivo de no necesitar estar conectado a Internet permanentemente, se han diseñado un servidor local y otro global. El servidor local será instalado en el simulador de tal forma que periódicamente consulte nuevas actualizaciones o mande información al servidor global que comparten todos los simuladores.
 
 \subsubsection{Courseware}
 
@@ -263,7 +263,7 @@ Con el objetivo de no necesitar estar conectado a internet permanentemente, se h
 %Tanto el motor de \ac{RV} como los dispositivos de entrada y salida no podrían ser capaces de servir como herramienta de aprendizaje por si mismos si no hubiera un software que guía las tareas y las acciones del usuario cuando utiliza el simulador.
 El módulo de \ac{Courseware} es una pieza fundamental en \ac{RASim} ya que gestiona la comunicación entre componentes, ayuda y recopila información de los usuarios. Se encarga de recopilar información de los dispositivos y se comunica con la base de datos que almacena las métricas de los usuarios. A la vez, será la aplicación encargada de manejar las ventanas y la interacción del usuario con el sistema. 
 
-El usuario podrá identificarse en el simulador a través de una interfaz. La aplicación recibirá el perfil desde el servidor y basándose en el perfil del usuario, el \ac{Courseware} proporcionará el escenario de entrenamiento según el protocolo que se haya definido. Incluso este módulo, es el encargado de descargar nuevos escenarios del simulador desde el servidor. 
+El usuario podrá identificarse en el simulador a través de una interfaz. La aplicación recibirá el perfil desde el servidor y basándose en el perfil del usuario, el \ac{Courseware} proporcionará el escenario de entrenamiento según el protocolo que se haya definido. Este módulo, es el encargado incluso de descargar nuevos escenarios del simulador desde el servidor. 
 
 Debido a la complejidad e importancia de este módulo, será descrito en una sección independiente a continuación.
 

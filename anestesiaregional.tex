@@ -1,6 +1,6 @@
 \section{Caracterización de los procedimientos simulados}
 
-En esta sección, se describirán los conceptos básicos necesarios para que el lector pueda entender el contexto en el que fueron desarrollado los simuladores que forman parte de los casos de uso para esta tesis. Se describirán los procedimientos médicos tanto de la anestesia regional como de las proyecciones utilizadas en radiología diagnóstica.
+En esta sección, se describirán los conceptos básicos necesarios para que el lector pueda entender el contexto en el que fueron desarrollados los simuladores que forman parte de los casos de uso para esta tesis. Se describirán los procedimientos médicos tanto de la anestesia regional como de las proyecciones utilizadas en radiología diagnóstica.
 
 \subsection{Anestesia regional}
 \label{art:ra}
@@ -32,7 +32,7 @@ Tradicionalmente, el médico encontraba el nervio a través de la administració
         \caption{\label{fig:raus}Anestesia regional guiada por \acl{US}.}
     \end{subfigure}
      
-    \caption{Técnicas de \acl{RA}}
+    \caption{Técnicas de \acl{RA}.}
    \end{figure}
    
    
@@ -40,7 +40,7 @@ Según la zona anatómica donde se realice, la posición del paciente varía y, 
 
 %\todo{Da más datos bloque del nervio femoral ... }
 
-La ejecución de este procedimiento no es sencillo para aquellos profesionales de anestesiología que no están familiarizados con las técnicas de \ac{US}. Además de los conocimientos teóricos, los profesionales deben entrenar sus habilidades no cognitivas. Estos entrenamientos habitualmente se practican con paciente reales, con la utilización de cadáveres \cite{Tsui2007} o el uso de \emph{fantomas} \cite{phantomra}. La incorporación de un simulador en el entrenamiento del procedimiento ayudará a solventar las limitaciones de los entrenamientos clásicos al ser repetible y seguro.
+La ejecución de este procedimiento no es sencilla para aquellos profesionales de anestesiología que no están familiarizados con las técnicas de \ac{US}. Además de los conocimientos teóricos, los profesionales deben entrenar sus habilidades no cognitivas. Estos entrenamientos habitualmente se llevan a cabo con pacientes reales, con la utilización de cadáveres \cite{Tsui2007} o mediante el uso de \emph{fantomas} \cite{phantomra}. La incorporación de un simulador en el entrenamiento del procedimiento ayudará a solventar las limitaciones de los entrenamientos clásicos al ser repetible y seguro.
 
 
 Según el Entregable 2.1 de \ac{RASimAs} titulado \emph{User Specifications} \cite{ded2.1}, el procedimiento de \ac{RA} guiado por \ac{US} se puede separar en los siguientes bloques:
@@ -53,20 +53,20 @@ Según el Entregable 2.1 de \ac{RASimAs} titulado \emph{User Specifications} \ci
     \item Inyección (\emph{Injection}): el médico libera el bolo y confirma que se ha realizado correctamente el bloqueo del nervio (figura \ref{fig:injection}). 
    
 \end{enumerate}
-\begin{figure}[bh]
+\begin{figure}[thbp]
   \centering
     \includegraphics[width=0.8\textwidth]{IMG/scoutscan.png}
     \caption{Tareas del bloque de exploración. }
   \label{fig:scoutscan}
    
 \end{figure}
-\clearpage
- \begin{figure}[th]
+ \begin{figure}[tbhp]
   \centering
     \includegraphics[width=0.8\textwidth]{IMG/needleguidance.png}
     \caption{Tareas del bloque de guiado de la aguja. }
   \label{fig:needleguidance}
 \end{figure}
+
  \begin{figure}[th]
   \centering
     \includegraphics[width=0.8\textwidth]{IMG/injection.png}
@@ -99,11 +99,10 @@ Según el Entregable 2.1 de \ac{RASimAs} titulado \emph{User Specifications} \ci
 Con el objetivo de explicar detalladamente cada bloque, se resumirá a continuación el procedimiento completo para un bloqueo femoral:
 %
 el anestesista deberá posicionarse en la sala de tal forma que su ángulo de visión permita observar al paciente y al monitor de \ac{US} %y al monitor de las constantes vitales
-sin mover la cabeza (figura \ref{fig:roomplace}). El médico configurará el equipo de \ac{US} con los valores apropiados y explorará la zona anatómica con la sonda. Para conseguir una imagen adecuada %para identificar los tejidos
-, se procederá a la maniobra PART (del inglés \emph{Pressure, Alignment, Rotation and Tilt}) que permite colocar correctamente la sonda de \ac{US} para asegurar una buena imagen donde se puedan localizar todas las estructuras anatómicas relevantes. Una vez el nervio esté localizado, el médico introducirá la aguja en plano\footnote{La aguja se introduce en paralelo con la proyección ultrasonográfica para que quede totalmente visible en la imagen.} con la sonda de \ac{US}, permitiendo así su visualización en la imagen y la dirigirá hasta la proximidad del nervio. Es entonces cuando antes de inyectar el bolo, deberá aspirar primero para comprobar que la punta de la aguja no se encuentre dentro de un vaso sanguíneo y pueda causar toxicidad sistémica \footnote{El anestésico se distribuirá por los vasos sanguíneos.}. Una vez comprobado, a continuación, solo se distribuirá una pequeña cantidad para asegurarse de la localización de la aguja y por último se liberará el bolo completamente. El profesional deberá confirmar que el bloqueo ha sido satisfactorio y comprobará cualquier síntoma de malestar en el paciente.
+sin mover la cabeza (figura \ref{fig:roomplace}). El médico configurará el equipo de \ac{US} con los valores apropiados y explorará la zona anatómica con la sonda. Para conseguir una imagen adecuada, se procederá a la maniobra PART (del inglés \emph{Pressure, Alignment, Rotation and Tilt}) que permite colocar correctamente la sonda de \ac{US} para asegurar una buena imagen donde se puedan localizar todas las estructuras anatómicas relevantes. Una vez el nervio esté localizado, el médico introducirá la aguja en plano\footnote{La aguja se introduce en paralelo con la proyección ultrasonográfica para que quede totalmente visible en la imagen.} con la sonda de \ac{US}, permitiendo así su visualización en la imagen y la dirigirá hasta la proximidad del nervio. Es entonces cuando antes de inyectar el bolo, deberá aspirar primero para comprobar que la punta de la aguja no se encuentre dentro de un vaso sanguíneo y pueda causar toxicidad sistémica \footnote{El anestésico se distribuirá por los vasos sanguíneos.}. Una vez comprobado, a continuación, solo se distribuirá una pequeña cantidad para asegurarse de la localización de la aguja y por último se liberará el bolo completamente. El profesional deberá confirmar que el bloqueo ha sido satisfactorio y comprobará cualquier síntoma de malestar en el paciente.
 
 
-\begin{figure}[th]
+\begin{figure}[thbp]
    \centering
     \includegraphics[width=0.5\textwidth]{IMG/roomplacement.png}
     \caption{Diagrama que muestra la disposición del anestesista en la sala de operaciones en un bloqueo femoral. Este se sienta adyacente al paciente, mirando hacia los monitores y con la bandeja de los instrumentos a su derecha.}

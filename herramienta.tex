@@ -9,36 +9,31 @@ La \emph{suite} \ac{ITGVPH} se encargará de generar la base de datos necesaria 
 
 
 %La tarea 3.5 del \del{ac{WP} 3} define el requisito de que la herramienta \ac{ITGVPH} permita adaptar la posición del paciente virtual creado de una postura inicial a la requerida por el simulador \ac{RASim}. 
-Para ello,  se va a incorporar el algoritmo propuesto, descrito en el capítulo \ref{cap:posing}, a una aplicación llamada \ac{TPTVPH}. Esta herramienta se ha construido para proporcionar una interfaz donde el usuario pueda seleccionar la postura del paciente virtual. De esta forma, un usuario con perfil sanitario podrá seleccionar y validar las posiciones que sean requeridas en el procedimiento médico que se deseen simular.
+Para ello,  se va a incorporar el algoritmo propuesto, descrito en el capítulo \ref{cap:posing}, a una aplicación llamada \ac{TPTVPH}. Esta herramienta se ha construido para proporcionar una interfaz donde el usuario pueda seleccionar la postura del paciente virtual. De esta forma, un usuario con perfil sanitario podrá seleccionar y validar las posiciones que sean requeridas en el procedimiento médico que se desee simular.
 
 
 
 %Para ello, se ha habilitado una ventana utilizando la librería \emph{OpenGL}\ref{adsf} y \emph{Qt}\ref{asdf}\todo{revisar} permitiendo al usuario pueda manipular el modelo anatómico desde todas las posiciones que necesite.
-Como primer paso, se ha dotado a la interfaz de una ventana donde el usuario puede observar el modelo anatómico. Con el objetivo de que el usuario pueda confirmar las correctas deformaciones del paciente virtual, el usuario puede interaccionar con la escena. De esta forma, de manera intuitiva el usuario puede utilizar el ratón para mover, rotar, acercar o alejar el modelo y poder supervisar la deformación desde todos los ángulos posibles.
+Como primer paso, se ha dotado a la interfaz de una ventana donde el usuario puede observar el modelo anatómico. Con el objetivo de poder confirmar las correctas deformaciones del paciente virtual, el usuario puede interaccionar con la escena, de esta forma, y de manera intuitiva puede utilizar el ratón para mover, rotar, acercar o alejar el modelo y poder supervisar la deformación desde todos los ángulos posibles.
 
-En segundo lugar, para permitir la selección de poses, se han incluido en la interfaz botones y actuadores, que permite al usuario seleccionar las articulaciones del \ac{VPH} una a una y definir sus movimientos respecto a los centros de rotaciones calculados (ver sec. \ref{posing:rigging}). El usuario puede revisar poses anteriormente almacenadas, modificarlas y guardarlas de nuevo. También, con el objetivo de introducir movimientos más orgánicos, el sistema permite cargar animaciones provenientes de \ac{MoCap}, o utilizar la tecnología del dispositivo Microsoft Kinect a forma de espejo para definir la postura del \ac{VPH} (ver sec. \ref{posing:Poses}).
+En segundo lugar, para permitir la selección de poses, se han incluido en la interfaz botones y actuadores, que permiten al usuario seleccionar las articulaciones del \ac{VPH} una a una y definir sus movimientos respecto a los centros de rotaciones calculados (ver sec. \ref{posing:rigging}). El usuario puede revisar poses anteriormente almacenadas, modificarlas y guardarlas de nuevo. También, con el objetivo de introducir movimientos más orgánicos, el sistema permite cargar animaciones provenientes de \ac{MoCap}, o utilizar la tecnología del dispositivo \emph{Microsoft Kinect} en forma de espejo para definir la postura del \ac{VPH} (ver sec. \ref{posing:Poses}).
 
 Además, se ha incorporado una funcionalidad que permite al usuario decidir si quiere esconder tejidos con la finalidad de contemplar la anatomía interna que estuviera oculta. De esta manera, se permite dejar de \emph{renderizar} la piel o los músculos para contemplar otros órganos.% más profundos. 
 
-Finalmente, se ha delegado la responsabilidad de generar posiciones correctas o realistas al usuario. En la sección \ref{posing:optimizacion}, se presenta una etapa optimización que se apoya en un modelo basado en físicas para mejorar el resultado obtenido. Al ser una etapa no interactiva, solo se activa cuando el usuario decide utilizarla. Una vez terminado el proceso, el usuario podrá observar los resultados y almacenar el paciente virtual obtenido que será utilizado en las demás etapas de la \emph{suite} \ac{ITGVPH}.  
+Finalmente, se ha delegado la responsabilidad de generar posiciones correctas o realistas al usuario. En la sección \ref{posing:optimizacion}, se presenta una etapa optimización que se apoya en un modelo basado en física para mejorar el resultado obtenido. Al ser una etapa no interactiva, solo se activa cuando el usuario decide utilizarla. Una vez terminado el proceso, se podrá observar los resultados y almacenar el paciente virtual obtenido que será utilizado en las demás etapas de la \emph{suite} \ac{ITGVPH}.  
 
 %Por último,  ha sido necesaria la adaptación del sistema para poder adecuarse a los formatos de fichero de entrada y salida de los modelos anatómicos. El formato elegido es \ac{X3D} de manera que será utilizados tanto por la herramienta \ac{ITGVPH} como por el simulador \ac{RASim}.
 
 %\subsection{Interfaz de usuario \ac{TPTVPH}}
 \paragraph{Interfaz de usuario \ac{TPTVPH}}\mbox{}\\
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\textwidth]{IMG/posingui.png}
-    \caption{Interfaz de usuario de \ac{TPTVPH} para la realización de poses. 1: Interfaz para modificar la postura del paciente virtual. 2: Lista de todos los modelos anatómicos que contenga el paciente virtual. 3: Ventana que muestra la escena virtual y en la barra superior se encuentra botones auxiliares.}
-    \label{fig:posui}
-\end{figure}
+
 
 %Como se ha comentado anteriormente, el usuario puede realizar la fase de posicionamiento de manera semiautomática, dónde es éste el que supervisa y realiza por sí mismo la deformación del modelo anatómico gracias a la interfaz de usuario de la herramienta \ac{TPTVPH} que proporciona una visualización 3D del modelo.
 En la figura \ref{fig:posui} se muestra la interfaz donde el usuario puede manejar las articulaciones que disponga el paciente virtual para conseguir la posición deseada. Se divide en las siguientes partes: 
 \begin{enumerate}
     \item En la primera división se permite al usuario seleccionar y manipular las articulaciones por separado. %que servirá para que la herramienta \emph{ITGVPH} actúe de manera automática.
-    Además, se podrán cargar configuraciones realizadas previamente o guardar posiciones del modelo en un archivo auxiliar. El usuario es el encargado de que la combinación de uno o más movimientos de articulaciones sean válidas para el entrenamiento del procedimiento médico. 
+    Además, se podrán cargar configuraciones realizadas previamente o guardar posiciones del modelo en un archivo auxiliar. El propio usuario es el encargado de que la combinación de uno o más movimientos de articulaciones sean válidas para el entrenamiento del procedimiento médico. 
     \item Esta división sirve para ocultar o mostrar las distintas estructuras anatómicas que se hayan cargado en la aplicación. Esto es especialmente útil si el usuario requiere comprobar cómo se deforma la anatomía interna sin que otros tejidos la oculten. %superiores la oculten.
     \item En la interfaz 3D se puede observar el paciente virtual cargado y, gracias al ratón, el usuario puede navegar en la escena para poder observar el modelo desde cualquier perspectiva. Además, en la barra superior se muestran unos botones que realizan funciones adicionales:
     \begin{enumerate}
@@ -51,7 +46,12 @@ En la figura \ref{fig:posui} se muestra la interfaz donde el usuario puede manej
     \end{enumerate}
     
 \end{enumerate}
-
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{IMG/posingui.png}
+    \caption{Interfaz de usuario de \acs{TPTVPH} para la realización de poses. 1: Interfaz para modificar la postura del paciente virtual. 2: Lista de todos los modelos anatómicos que contenga el paciente virtual. 3: Ventana que muestra la escena virtual y en la barra superior se encuentran botones auxiliares.}
+    \label{fig:posui}
+\end{figure}
 
 
 
@@ -115,9 +115,9 @@ En la figura \ref{fig:toolarq} se muestra la arquitectura diseñada para la herr
 
 Hay que destacar que no se integró  la tarea 3.4 (enumerada en la sección \ref{art:rasimas}) que se encargaba de la generación de la descripción fisiológica al no ser necesaria. Por parte de los socios médicos del proyecto, se decidió no incluir la simulación de la técnica de estimulación eléctrica del nervio en el simulador \ac{RASim} con el objetivo de  fomentar solo la práctica de la \ac{RA} guiada por \ac{US}.
 
-El proceso comienza con el módulo de registro diseñado por \ac{UKA-IMI}. Se procede a cargar una imagen médica que contiene la anatomía objetivo, procedente de una base de datos que almacena diferentes imágenes médicas (el formato escogido es llamado \acs{DICOM}), además del modelo superficial anatómico de referencia en formato \ac{X3D}. Después, se realiza un registro automático entre la imagen médica y el modelo comercial, dando como resultado un nuevo modelo que será el primer paso para crear un \ac{VPH}. Para más información se puede consultar en \cite{deOliveira:2015}. Este resultado será la entrada de la siguiente etapa.
+El proceso comienza con el módulo de registro diseñado por \ac{UKA-IMI}. Se procede a cargar una imagen médica que contiene la anatomía objetivo, procedente de una base de datos que almacena diferentes imágenes médicas (el formato escogido es llamado \acs{DICOM}), además del modelo superficial anatómico de referencia en formato \ac{X3D}. Después, se realiza un registro automático entre la imagen médica y el modelo comercial, dando como resultado un nuevo modelo que será el primer paso para crear un \ac{VPH}. Para más información se puede consultar \cite{deOliveira:2015}. Este resultado será la entrada de la siguiente etapa.
 
-La segunda etapa se utiliza el módulo de posicionamiento. Esta etapa se corresponde al objetivo principal de esta tesis ampliamente descrito en el capítulo \ref{cap:posing}. Este recibe el modelo \ac{VPH} que contiene el modelo superficial y la anatomía interna, permitiendo a los usuarios seleccionar y generar posiciones útiles para el entrenamiento.
+En la segunda etapa se utiliza el módulo de posicionamiento. Esta etapa se corresponde al objetivo principal de esta tesis ampliamente descrito en el capítulo \ref{cap:posing}. Este recibe el modelo \ac{VPH} que contiene el modelo superficial y la anatomía interna, permitiendo a los usuarios seleccionar y generar posiciones útiles para el entrenamiento.
 
 Finalmente, el modelo superficial resultante es suministrado al último módulo desarrollado por \ac{INRIA}. Esta tarea se encarga de generar el modelo volumétrico con  información biomecánica.
 Tanto el modelo resultante superficial como el modelo volumétrico producidos por la herramienta \ac{ITGVPH}, se utilizarán por el simulador \ac{RASim}. Para más información se puede consultar \cite{ded3.3}.
@@ -169,17 +169,17 @@ Es importante destacar que, aunque las tres etapas crean modelos volumétricos d
 % \subsection{Interfaz de usuario}
 % \label{rasim:herramientaui}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{IMG/toolkitui.png}
-    \caption{Interfaz de la herramienta \acs{ITGVPH}. El usuario elegirá los modelos con los que quiere trabajar. Avanzará en el proceso hasta que la herramienta \acs{TPTVPH} le pregunte por seleccionar la pose. Una vez terminado, la herramienta sigue con el proceso.}
+    \caption{Interfaz de la herramienta \acs{ITGVPH}. El usuario elegirá los modelos con los que quiere trabajar. Avanzará en el proceso hasta que la herramienta \acs{TPTVPH} le pregunte por la selección de pose. Una vez terminado, la herramienta sigue con el proceso.}
     \label{fig:toolui}
 \end{figure}
 
 
 %A continuación, se muestra la interfaz desarrollada para la herramienta \ac{ITGVPH}.
-La interfaz ha sido diseñada para tener la mínima complejidad, debido a que se pretende reducir la dificultad para usuarios sin perfil técnico. De esta manera, la interfaz de la herramienta se puede resumir en la figura \ref{fig:toolui}. En esta figura se puede observar que la primera ventana se pueden seleccionar todos los parámetros necesarios para que la herramienta trabaje de forma automática.
-En orden, el primer parámetro que se puede seleccionar es el conjunto de imágenes médicas que estén disponibles. Como se muestra en la figura, en este caso se dispone de imágenes en formato \acs{DICOM}.
+La interfaz ha sido diseñada para tener la mínima complejidad, debido a que se pretende reducir la dificultad para usuarios sin perfil técnico. De esta manera, la interfaz de la herramienta se puede resumir en la figura \ref{fig:toolui}. En esta figura se puede observar que en la primera ventana se pueden seleccionar todos los parámetros necesarios para que la herramienta trabaje de forma automática.
+En orden, el primer parámetro que se puede seleccionar es el conjunto de imágenes médicas que están disponibles. Como se muestra en la figura, en este caso se disponen de imágenes en formato \acs{DICOM}.
 Seguidamente, el segundo parámetro es el modelo anatómico de referencia que se pretende usar, como puede ser \emph{ZygoteBody}$^{TM}$ o \emph{Anatomium}. En los primeros prototipos sólo se ha utilizado el modelo anatómico \emph{ZygoteBody}$^{TM}$ pero la herramienta está diseñada para permitir la entrada de cualquier modelo anatómico de referencia. Este modelo será usado para hacer un registro con las imágenes anteriormente seleccionadas. 
 Finalmente, se selecciona el archivo que contiene los parámetros biomecánicos y que se utilizarán en la última etapa.
 
